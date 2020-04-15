@@ -19,13 +19,16 @@ function LiveStream(props) {
   });
   if (loading)
     return (
-      <div className="stream-container">
-        <div className="stream-wrapper">
-          <div className="stream">
-            <h1>LOADING...</h1>
+      <>
+        <h1 className="center-align">Please Wait</h1>
+        <div className="stream-container">
+          <div className="stream-wrapper">
+            <div className="stream">
+              <h1>LOADING...</h1>
+            </div>
           </div>
         </div>
-      </div>
+      </>
     );
   if (error)
     return (
