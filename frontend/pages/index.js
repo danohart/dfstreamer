@@ -1,11 +1,11 @@
-import React, { useState, useEffect, useRef } from "react";
-import Videos from "../components/Videos";
-import LiveStream from "../components/LiveStream";
+import React, { useState, useEffect, useRef } from 'react';
+import Videos from '../components/Videos';
+import LiveStream from '../components/LiveStream';
 
 function Home() {
   const [isChatHidden, setChatHidden] = useState(true);
-  const [twitchUserName, setTwitchUserName] = useState("df_thelivingroom");
-  const [name, setName] = useState("");
+  const [twitchUserName, setTwitchUserName] = useState('df_thelivingroom');
+  const [name, setName] = useState('');
   const [isSticky, setSticky] = useState(false);
 
   const ref = useRef(null);
@@ -14,10 +14,10 @@ function Home() {
   };
 
   useEffect(() => {
-    window.addEventListener("scroll", handleScroll);
+    window.addEventListener('scroll', handleScroll);
 
     return () => {
-      window.removeEventListener("scroll", () => handleScroll);
+      window.removeEventListener('scroll', () => handleScroll);
     };
   }, []);
 
@@ -33,7 +33,7 @@ function Home() {
 
   return (
     <>
-      <div className={!isChatHidden ? "home chat-open" : "home"}>
+      <div className={!isChatHidden ? 'home chat-open' : 'home'}>
         <form onSubmit={changeUser}>
           <div className="user-field">
             <input
@@ -45,7 +45,7 @@ function Home() {
             <input type="submit" />
           </div>
         </form>
-        <div className={`sticky-wrapper${isSticky ? " sticky" : ""}`} ref={ref}>
+        <div className={`sticky-wrapper${isSticky ? ' sticky' : ''}`} ref={ref}>
           <LiveStream twitchUser={twitchUserName} />
         </div>
         {/* <Videos userId="512333628" />
@@ -72,7 +72,7 @@ function Home() {
           </div>
         </div>
       ) : (
-        ""
+        ''
       )}
     </>
   );

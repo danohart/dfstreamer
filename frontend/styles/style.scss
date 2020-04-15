@@ -39,8 +39,14 @@ h1 {
   font-size: 4em;
   text-transform: uppercase;
 
+  @include desktop {
+    word-wrap: break-word;
+    font-size: 3.56em;
+  }
+
   @include tablet {
     font-size: 3em;
+    word-wrap: break-word;
   }
 
   @include mobile {
@@ -69,6 +75,7 @@ h3 {
   flex-direction: row;
 
   .main {
+    width: 100%;
     max-width: 1440px;
     min-height: 650px;
     margin: 0px auto;
@@ -84,7 +91,7 @@ h3 {
       align-items: center;
 
       &.chat-open {
-        width: calc(100% - 400px);
+        width: calc(100% - 440px);
         margin-left: 0px;
 
         @include tablet {
@@ -95,13 +102,24 @@ h3 {
           width: 100%;
         }
       }
+      .sticky-wrapper {
+        width: 100%;
+      }
 
-      @include mobile {
-        .sticky-wrapper {
-          position: relative;
-          height: 20rem; /* We need to change this value */
+      .sticky-wrapper {
+        position: relative;
+        height: 20rem;
+
+        @include tablet {
+          height: 50rem;
         }
 
+        @include mobile {
+          height: 20rem;
+        }
+      }
+
+      @include mobile {
         .sticky {
           .stream-container {
             .stream-wrapper {
