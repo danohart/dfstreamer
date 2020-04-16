@@ -1,10 +1,13 @@
-const { gql } = require("apollo-server-express");
+const { gql } = require('apollo-server-express');
 
 const typeDefs = gql`
 
-  type Book {
+  type Event {
     title: String
-    author: String
+    host: String
+    date: String
+    startTime: String
+    endTime: String
   }
 
   type TwitchUser {
@@ -38,7 +41,7 @@ const typeDefs = gql`
   }
 
   type Query {
-    books: [Book]
+    events(host: String): [Event]
     twitchUser(twitchUser: String!): [TwitchUser]
     twitchUserVideos(id: ID!): [TwitchUserVideo]
     twitchUserStream(user_id: String!): [TwitchUserStream]

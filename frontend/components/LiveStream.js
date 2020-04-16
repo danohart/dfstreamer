@@ -1,6 +1,7 @@
 import { useQuery } from '@apollo/react-hooks';
 import gql from 'graphql-tag';
 import Stream from './Stream';
+import Events from './Events';
 
 import { withData } from '../lib/withData';
 
@@ -71,6 +72,7 @@ function LiveStream(props) {
           <Stream twitchUser="df_thebedroom" />
         </div>
       </div>
+      <Events />
     </>
   );
 }

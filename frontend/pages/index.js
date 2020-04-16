@@ -52,9 +52,15 @@ function Home() {
       <Videos userId="512372287" />
       <Videos userId="512337495" /> */}
       </div>
-      <div className="chat-tab" onClick={() => setChatHidden(false)}>
-        Chat
-      </div>
+
+      {isChatHidden ? (
+        <div className="chat-tab" onClick={() => setChatHidden(false)}>
+          Chat
+        </div>
+      ) : (
+        ''
+      )}
+
       {!isChatHidden ? (
         <div className="chat-container expanded">
           <a className="close-chat" onClick={() => setChatHidden(true)}>

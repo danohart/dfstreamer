@@ -1,11 +1,24 @@
-const books = [
+const events = [
   {
-    title: 'Harry Potter and the Chamber of Secrets',
-    author: 'J.K. Rowling',
+    title: 'Weezer',
+    host: 'df_thelivingroom',
+    date: '05012020',
+    startTime: '14:00',
+    endTime: '14:30',
   },
   {
-    title: 'Jurassic Park',
-    author: 'Michael Crichton',
+    title: 'The Strokes',
+    host: 'df_thebedroom',
+    date: '05012020',
+    startTime: '14:30',
+    endTime: '16:00',
+  },
+  {
+    title: 'Run The Jewels',
+    host: 'df_thegarage',
+    date: '05012020',
+    startTime: '16:00',
+    endTime: '18:00',
   },
 ];
 
@@ -15,7 +28,7 @@ const twitchClientID = process.env.twitchClientID;
 
 const resolvers = {
   Query: {
-    books: () => books,
+    events: () => events,
 
     async twitchUser(parent, args) {
       const { twitchUser } = args;
