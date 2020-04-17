@@ -400,6 +400,10 @@ form {
     font-size: 14px;
     background-color: $dark-gray;
     color: $light-gray;
+
+    @include mobile {
+      font-size: 18px;
+    }
   }
   .dropdown-icon {
     margin-left: -35px;
