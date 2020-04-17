@@ -66,9 +66,7 @@ function Home() {
           <select id="live-streams" onChange={changeUserSelect}>
             <option>Live Streams</option>
             {data.twitchUserStream.map((user) => (
-              <option>
-                {user.user_name} // Viewers: {user.viewer_count}
-              </option>
+              <option>{user.user_name}</option>
             ))}
           </select>
           <div className="dropdown-icon">

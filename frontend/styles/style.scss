@@ -213,6 +213,13 @@ h3 {
         padding: 5px 10px;
         border: 4px solid $secondary-color-bold;
         font-size: 14px;
+        display: flex;
+        width: 25.5%;
+
+        svg {
+          width: 8px;
+          margin: 0 5px;
+        }
 
         @include tablet {
           margin-left: 10px;
