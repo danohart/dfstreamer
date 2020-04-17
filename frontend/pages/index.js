@@ -91,9 +91,9 @@ function Home() {
 
       {!isChatHidden ? (
         <div className="chat-container expanded">
-          <a className="close-chat" onClick={() => setChatHidden(true)}>
+          <div className="close-chat" onClick={() => setChatHidden(true)}>
             <FontAwesomeIcon icon={faTimes} /> Close Chat
-          </a>
+          </div>
           <div className="chat">
             <iframe
               src={`https://www.twitch.tv/embed/${twitchUserName}/chat?parent=distancefest.com`}
