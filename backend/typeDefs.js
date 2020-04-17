@@ -38,13 +38,14 @@ const typeDefs = gql`
       title: String
       type: String
       thumbnail_url: String
+      viewer_count: String
   }
 
   type Query {
     events: [Event]
     twitchUser(twitchUser: String!): [TwitchUser]
     twitchUserVideos(id: ID!): [TwitchUserVideo]
-    twitchUserStream(user_id: String!): [TwitchUserStream]
+    twitchUserStream(user_id: String): [TwitchUserStream]
   }
 `;
 

@@ -79,7 +79,6 @@ h3 {
     max-width: 1440px;
     min-height: 650px;
     margin: 0px auto;
-    padding: 0px 10px;
     display: flex;
     flex-direction: column;
 
@@ -108,13 +107,14 @@ h3 {
 
       .sticky-wrapper {
         position: relative;
+        min-height: 40rem;
 
         @include tablet {
           height: 60rem;
         }
 
         @include mobile {
-          height: 35rem;
+          min-height: 25rem;
         }
       }
 
@@ -372,6 +372,40 @@ form {
   }
 }
 
+.stream-dropdown {
+  width: 80%;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+
+  label {
+    display: block;
+  }
+
+  select {
+    -webkit-appearance: none;
+    width: 100%;
+    padding: 10px;
+    display: block;
+    margin: 10px auto;
+    font-size: 14px;
+    background-color: $dark-gray;
+    color: $light-gray;
+  }
+  .dropdown-icon {
+    margin-left: -35px;
+    margin-top: 3px;
+    width: 25px;
+    color: $white;
+
+    svg {
+      width: 100%;
+      height: auto;
+    }
+  }
+}
+
 .events-container {
   display: grid;
   grid-template-rows:
@@ -409,15 +443,12 @@ form {
   @include mobile {
     display: flex;
     flex-direction: column;
+    margin-top: 40px;
   }
 
   .time-slot {
     grid-column: times;
     font-size: 0.75em;
-  }
-
-  @include mobile {
-    flex-direction: column;
   }
 
   .event {
@@ -451,6 +482,7 @@ form {
 .footer {
   min-height: 80px;
   padding: 20px 0px;
+  margin-top: 20px;
   background-color: $secondary-color;
   text-align: center;
 
@@ -458,7 +490,31 @@ form {
     text-transform: uppercase;
   }
 
-  &-content {
+  &-links {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    font-size: 9px;
+
+    div a {
+      display: flex;
+      flex-direction: column;
+      padding: 0px 10px;
+      margin-bottom: 20px;
+      color: $white;
+      text-decoration: none;
+
+      &:hover {
+        color: $dark-gray;
+      }
+      svg {
+        height: 40px;
+      }
+    }
+  }
+
+  &-copyright {
     font-weight: 300;
   }
 }

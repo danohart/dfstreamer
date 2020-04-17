@@ -1,5 +1,12 @@
 import React, { useState, useEffect, useRef } from 'react';
+import { useQuery } from '@apollo/react-hooks';
+import gql from 'graphql-tag';
 import Videos from '../components/Videos';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import {
+  faTimes,
+  faChevronCircleDown,
+} from '@fortawesome/free-solid-svg-icons';
 import LiveStream from '../components/LiveStream';
 import Events from '../components/Events';
 
@@ -32,6 +39,14 @@ function Home() {
     setTwitchUserName(name);
   };
 
+  const changeUserSelect = (e) => {
+    e.preventDefault();
+    setTwitchUserName(e.target.value);
+  };
+
+  const { loading, data } = useQuery(LIVE_STREAMS);
+  if (loading) return <p>Waiting</p>;
+
   return (
     <>
       <div className={!isChatHidden ? 'home chat-open' : 'home'}>
@@ -46,6 +61,20 @@ function Home() {
             <input type="submit" />
           </div>
         </form>
+        <div className="stream-dropdown">
+          <label for="live-streams">Pick a Stream</label>
+          <select id="live-streams" onChange={changeUserSelect}>
+            <option>Live Streams</option>
+            {data.twitchUserStream.map((user) => (
+              <option>
+                {user.user_name} // Viewers: {user.viewer_count}
+              </option>
+            ))}
+          </select>
+          <div className="dropdown-icon">
+            <FontAwesomeIcon icon={faChevronCircleDown} />
+          </div>
+        </div>
         <div className={`sticky-wrapper${isSticky ? ' sticky' : ''}`} ref={ref}>
           <LiveStream twitchUser={twitchUserName} />
         </div>
@@ -65,7 +94,7 @@ function Home() {
       {!isChatHidden ? (
         <div className="chat-container expanded">
           <a className="close-chat" onClick={() => setChatHidden(true)}>
-            X Close Chat
+            <FontAwesomeIcon icon={faTimes} /> Close Chat
           </a>
           <div className="chat">
             <iframe
@@ -86,4 +115,12 @@ function Home() {
   );
 }
 
+const LIVE_STREAMS = gql`
+  query LIVE_STREAMS {
+    twitchUserStream {
+      user_name
+      viewer_count
+    }
+  }
+`;
 export default Home;

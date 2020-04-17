@@ -95,7 +95,7 @@ const resolvers = {
     async twitchUserStream(parent, args) {
       const { user_id } = args;
       const response = await fetch(
-        `https://api.twitch.tv/helix/streams?user_login=${user_id}`,
+        `https://api.twitch.tv/helix/streams?${!user_id ? '' : `user_login=${user_id}`}`,
         {
           method: 'GET',
           headers: {
