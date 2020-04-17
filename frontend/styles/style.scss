@@ -72,7 +72,7 @@ h3 {
 
 .site-container {
   display: flex;
-  flex-direction: row;
+  flex-direction: column;
 
   .main {
     width: 100%;
@@ -108,14 +108,13 @@ h3 {
 
       .sticky-wrapper {
         position: relative;
-        height: 20rem;
 
         @include tablet {
-          height: 50rem;
+          height: 60rem;
         }
 
         @include mobile {
-          height: 20rem;
+          height: 35rem;
         }
       }
 
@@ -151,7 +150,7 @@ h3 {
     .chat-tab {
       position: fixed;
       cursor: pointer;
-      z-index: 1;
+      z-index: 3;
       right: -23px;
       top: 180px;
       padding: 8px 15px;
@@ -374,15 +373,59 @@ form {
 }
 
 .events-container {
-  display: flex;
-  justify-content: space-evenly;
-  margin-bottom: 10px;
+  display: grid;
+  grid-template-rows:
+    [tracks] auto /* Foreshadowing! */
+    [time-1400] 1fr
+    [time-1430] 1fr
+    [time-1500] 1fr
+    [time-1530] 1fr
+    [time-1600] 1fr
+    [time-1630] 1fr
+    [time-1700] 1fr
+    [time-1730] 1fr
+    [time-1800] 1fr
+    [time-1830] 1fr
+    [time-1900] 1fr
+    [time-1930] 1fr
+    [time-2000] 1fr
+    [time-2030] 1fr
+    [time-2100] 1fr
+    [time-2130] 1fr
+    [time-2200] 1fr
+    [time-2230] 1fr
+    [time-2300] 1fr
+    [time-2330] 1fr
+    [time-0000] 1fr
+    [time-0030] 1fr;
+
+  grid-template-columns:
+    [times] 4em
+    [df_thelivingroom-start] 1fr
+    [df_thelivingroom-end df_thebedroom-start] 1fr
+    [df_thebedroom-end df_thegarage-start] 1fr
+    [df_thegarage-end];
+
+  @include mobile {
+    display: flex;
+    flex-direction: column;
+  }
+
+  .time-slot {
+    grid-column: times;
+    font-size: 0.75em;
+  }
+
+  @include mobile {
+    flex-direction: column;
+  }
 
   .event {
     display: flex;
     flex-direction: column;
     border: 2px solid $fest-blue;
     padding: 20px;
+    margin: 2px;
 
     &-title {
       h3 {
@@ -402,5 +445,20 @@ form {
         }
       }
     }
+  }
+}
+
+.footer {
+  min-height: 80px;
+  padding: 20px 0px;
+  background-color: $secondary-color;
+  text-align: center;
+
+  h4 {
+    text-transform: uppercase;
+  }
+
+  &-content {
+    font-weight: 300;
   }
 }

@@ -41,7 +41,7 @@ const typeDefs = gql`
   }
 
   type Query {
-    events(host: String): [Event]
+    events: [Event]
     twitchUser(twitchUser: String!): [TwitchUser]
     twitchUserVideos(id: ID!): [TwitchUserVideo]
     twitchUserStream(user_id: String!): [TwitchUserStream]

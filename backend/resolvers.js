@@ -1,34 +1,64 @@
+const fetch = require('isomorphic-unfetch');
+require('now-env');
+const twitchClientID = process.env.twitchClientID;
+
 const events = [
   {
-    title: 'Weezer',
+    title: 'Lil Wayne',
     host: 'df_thelivingroom',
     date: '05012020',
     startTime: '14:00',
     endTime: '14:30',
   },
   {
-    title: 'The Strokes',
+    title: 'Hozier',
     host: 'df_thebedroom',
     date: '05012020',
     startTime: '14:30',
     endTime: '16:00',
   },
   {
-    title: 'Run The Jewels',
+    title: 'The Revivalists',
     host: 'df_thegarage',
     date: '05012020',
     startTime: '16:00',
     endTime: '18:00',
   },
+  {
+    title: 'Weezer',
+    host: 'df_thelivingroom',
+    date: '05012020',
+    startTime: '16:00',
+    endTime: '18:30',
+  },
+  {
+    title: 'Tame Impala',
+    host: 'df_thebedroom',
+    date: '05012020',
+    startTime: '18:00',
+    endTime: '19:30',
+  },
+  {
+    title: 'The Strokes',
+    host: 'df_thegarage',
+    date: '05012020',
+    startTime: '19:30',
+    endTime: '21:30',
+  },
+  {
+    title: 'Childish Gambino',
+    host: 'df_thebedroom',
+    date: '05012020',
+    startTime: '21:00',
+    endTime: '22:30',
+  },
 ];
-
-const fetch = require('isomorphic-unfetch');
-require('now-env');
-const twitchClientID = process.env.twitchClientID;
 
 const resolvers = {
   Query: {
-    events: () => events,
+    events() {
+      return events;
+    },
 
     async twitchUser(parent, args) {
       const { twitchUser } = args;

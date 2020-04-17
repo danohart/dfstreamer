@@ -1,4 +1,5 @@
-import Head from "next/head";
+import Head from 'next/head';
+import Footer from './Footer';
 
 function Page(props) {
   return (
@@ -8,6 +9,7 @@ function Page(props) {
         <link rel="icon" type="icon" href="../public/favicon.ico"></link>
       </Head>
       <div className="main">{props.children}</div>
+      <Footer />
     </div>
   );
 }

@@ -1,14 +1,15 @@
 import React, { useState, useEffect, useRef } from 'react';
 import Videos from '../components/Videos';
 import LiveStream from '../components/LiveStream';
+import Events from '../components/Events';
 
 function Home() {
+  const ref = useRef('');
   const [isChatHidden, setChatHidden] = useState(true);
   const [twitchUserName, setTwitchUserName] = useState('df_thelivingroom');
   const [name, setName] = useState('');
   const [isSticky, setSticky] = useState(false);
 
-  const ref = useRef(null);
   const handleScroll = () => {
     setSticky(ref.current.getBoundingClientRect().top <= 0);
   };
@@ -80,6 +81,7 @@ function Home() {
       ) : (
         ''
       )}
+      <Events />
     </>
   );
 }

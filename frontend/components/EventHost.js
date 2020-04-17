@@ -40,23 +40,50 @@ function Events(props) {
         <p>{error.message}</p>
       </>
     );
-  console.log('stage', props.stage);
+
+  const events = data.events;
+
   return (
-    <div className="events-container">
-      {data.events.map((event) => (
-        <div className="event" key={event.title}>
-          <div className="event-title">
-            <h3>{event.title}</h3>
-          </div>
-          <div className="event-time">
-            <div className="event-time-startTime">
-              {tConvert(event.startTime)}
-            </div>
-            <div className="event-time-endTime">{tConvert(event.endTime)}</div>
-          </div>
-        </div>
-      ))}
-    </div>
+    <>
+      <h3
+        className="center-align"
+        style={{ gridColumn: `${props.stage}`, gridRow: 'tracks' }}
+      >
+        {props.stage === 'df_thelivingroom' ? 'Living Room' : ''}
+        {props.stage === 'df_thebedroom' ? 'Bedroom' : ''}
+        {props.stage === 'df_thegarage' ? 'Garage' : ''}
+      </h3>
+      {events.map((event) => {
+        if (event.host === props.stage)
+          return (
+            <>
+              <h2 class="time-slot" style={{ gridRow: 'time-1400' }}></h2>
+              <div
+                className={`event ${props.stage}`}
+                style={{
+                  gridRow: `time-${event.startTime
+                    .split(':')
+                    .join('')} / time-${event.endTime.split(':').join('')}`,
+                  gridColumn: props.stage,
+                }}
+                key={event.title}
+              >
+                <div className="event-title">
+                  <h3>{event.title}</h3>
+                </div>
+                <div className="event-time">
+                  <div className="event-time-startTime">
+                    {tConvert(event.startTime)}
+                  </div>
+                  <div className="event-time-endTime">
+                    {tConvert(event.endTime)}
+                  </div>
+                </div>
+              </div>
+            </>
+          );
+      })}
+    </>
   );
 }
 

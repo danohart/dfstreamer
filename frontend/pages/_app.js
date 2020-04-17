@@ -13,7 +13,7 @@ const App = ({ Component, pageProps, apollo }) => (
 
 export default withData(({ initialState }) => {
   return new ApolloClient({
-    uri: 'http://localhost:4000',
+    uri: 'http://localhost:4444',
     cache: new InMemoryCache().restore(initialState || {}),
   });
 })(App);
