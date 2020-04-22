@@ -1,63 +1,44 @@
 const fetch = require('isomorphic-unfetch');
 require('now-env');
+const bcrypt = require('bcryptjs');
+const jwt = require('jsonwebtoken');
 const twitchClientID = process.env.twitchClientID;
 
-const events = [
-  {
-    title: 'Lil Wayne',
-    host: 'df_thelivingroom',
-    date: '05012020',
-    startTime: '14:00',
-    endTime: '14:30',
-  },
-  {
-    title: 'Hozier',
-    host: 'df_thebedroom',
-    date: '05012020',
-    startTime: '14:30',
-    endTime: '16:00',
-  },
-  {
-    title: 'The Revivalists',
-    host: 'df_thegarage',
-    date: '05012020',
-    startTime: '16:00',
-    endTime: '18:00',
-  },
-  {
-    title: 'Weezer',
-    host: 'df_thelivingroom',
-    date: '05012020',
-    startTime: '16:00',
-    endTime: '18:30',
-  },
-  {
-    title: 'Tame Impala',
-    host: 'df_thebedroom',
-    date: '05012020',
-    startTime: '18:00',
-    endTime: '19:30',
-  },
-  {
-    title: 'The Strokes',
-    host: 'df_thegarage',
-    date: '05012020',
-    startTime: '19:30',
-    endTime: '21:30',
-  },
-  {
-    title: 'Childish Gambino',
-    host: 'df_thebedroom',
-    date: '05012020',
-    startTime: '21:00',
-    endTime: '22:30',
-  },
-];
-
 const resolvers = {
+  Mutation: {
+    async createEvent(parent, args, ctx, info) {
+      console.log({ ...args, hello: 'there' });
+      event = await db.collection('schedule').insertOne(args);
+      return args;
+    },
+
+    async signup(parent, args, res, info) {
+      console.log('args', args);
+      args.email = args.email.toLowerCase();
+      const password = await bcrypt.hash(args.password, 10);
+      const user = await db.collection('users').insertOne({
+        ...args,
+        password,
+        permissions: { set: ['USER'] },
+      });
+      // // create the JWT token for them
+      // const token = jwt.sign({ userId: user.id }, process.env.APP_SECRET);
+      // // We set the jwt as a cookie on the response
+      // res.cookie('token', token, {
+      //   httpOnly: true,
+      //   maxAge: 1000 * 60 * 60 * 24 * 365, // 1 year cookie
+      // });
+      console.log(`User created with email ${args.email}`);
+      return args;
+    },
+  },
+
   Query: {
-    events() {
-      return events;
+    events: async () => {
+      values = await db.collection('schedule').find().toArray().then(res => {
+        return res;
+      });
+      return values;
     },
 
     async twitchUser(parent, args) {

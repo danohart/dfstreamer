@@ -2,6 +2,25 @@ const { gql } = require('apollo-server-express');
 
 const typeDefs = gql`
 
+  enum Permission {
+    ADMIN
+    USER
+    EVENTCREATE
+    EVENTUPDATE
+    EVENTDELETE
+    PERMISSIONUPDATE
+  }
+
+  type User {
+    email: String!
+    password: String!
+    firstName: String!
+    lastName: String!
+    resetToken: String
+    resetTokenExpiry: Float
+    permissions: [Permission] 
+  }
+
   type Event {
     title: String
     host: String
@@ -46,6 +65,23 @@ const typeDefs = gql`
     twitchUser(twitchUser: String!): [TwitchUser]
     twitchUserVideos(id: ID!): [TwitchUserVideo]
     twitchUserStream(user_id: String): [TwitchUserStream]
+  }
+
+  type Mutation {
+    createEvent(
+      title: String
+      host: String
+      date: String
+      startTime: String
+      endTime: String
+    ): Event!
+
+    signup(
+      email: String!
+      password: String!
+      firstName: String!
+      lastName: String!
+    ): User!
   }
 `;
 

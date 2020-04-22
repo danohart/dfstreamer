@@ -57,9 +57,9 @@ function Events(props) {
         if (event.host === props.stage)
           return (
             <>
-              <h2 class="time-slot" style={{ gridRow: 'time-1400' }}></h2>
               <div
                 className={`event ${props.stage}`}
+                key={event.title}
                 style={{
                   gridRow: `time-${event.startTime
                     .split(':')

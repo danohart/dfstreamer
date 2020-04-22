@@ -9,11 +9,17 @@ import {
 } from '@fortawesome/free-solid-svg-icons';
 import LiveStream from '../components/LiveStream';
 import Events from '../components/Events';
+import Notification from '../components/Notification';
 
 function Home() {
   const ref = useRef('');
   const [isChatHidden, setChatHidden] = useState(true);
-  const [twitchUserName, setTwitchUserName] = useState('df_thelivingroom');
+  const [
+    twitchUserName,
+    setTwitchUserName,
+    twitchUserViews,
+    setTwitchUserViews,
+  ] = useState('df_thelivingroom');
   const [name, setName] = useState('');
   const [isSticky, setSticky] = useState(false);
 
@@ -37,13 +43,13 @@ function Home() {
   const changeUser = (e) => {
     e.preventDefault();
     setTwitchUserName(name);
+    setTwitchUserViews(data.twitchUserStream.viewer_count);
   };
 
   const changeUserSelect = (e) => {
     e.preventDefault();
     setTwitchUserName(e.target.value);
   };
-
   const { loading, data } = useQuery(LIVE_STREAMS);
   if (loading) return <p>Waiting</p>;
 
@@ -62,11 +68,11 @@ function Home() {
           </div>
         </form>
         <div className="stream-dropdown">
-          <label for="live-streams">Pick a Stream</label>
+          <label htmlFor="live-streams">Pick a Stream</label>
           <select id="live-streams" onChange={changeUserSelect}>
             <option>Live Streams</option>
             {data.twitchUserStream.map((user) => (
-              <option>{user.user_name}</option>
+              <option key={user.user_name}>{user.user_name}</option>
             ))}
           </select>
           <div className="dropdown-icon">
@@ -109,6 +115,9 @@ function Home() {
         ''
       )}
       <Events />
+      <div className="notifications">
+        <Notification twitchUserName={twitchUserName} />
+      </div>
     </>
   );
 }
