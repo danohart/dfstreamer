@@ -8,18 +8,14 @@ import {
   faChevronCircleDown,
 } from '@fortawesome/free-solid-svg-icons';
 import LiveStream from '../components/LiveStream';
+import Stream from '../components/Stream';
 import Events from '../components/Events';
 import Notification from '../components/Notification';
 
 function Home() {
   const ref = useRef('');
   const [isChatHidden, setChatHidden] = useState(true);
-  const [
-    twitchUserName,
-    setTwitchUserName,
-    twitchUserViews,
-    setTwitchUserViews,
-  ] = useState('df_thelivingroom');
+  const [twitchUserName, setTwitchUserName] = useState('df_thelivingroom');
   const [name, setName] = useState('');
   const [isSticky, setSticky] = useState(false);
 
@@ -43,7 +39,6 @@ function Home() {
   const changeUser = (e) => {
     e.preventDefault();
     setTwitchUserName(name);
-    setTwitchUserViews(data.twitchUserStream.viewer_count);
   };
 
   const changeUserSelect = (e) => {
@@ -52,6 +47,15 @@ function Home() {
   };
   const { loading, data } = useQuery(LIVE_STREAMS);
   if (loading) return <p>Waiting</p>;
+
+  const switchStream = (e) => {
+    setTwitchUserName(e);
+    window.scrollTo({
+      top: 300,
+      left: 100,
+      behavior: 'smooth',
+    });
+  };
 
   return (
     <>
@@ -82,9 +86,21 @@ function Home() {
         <div className={`sticky-wrapper${isSticky ? ' sticky' : ''}`} ref={ref}>
           <LiveStream twitchUser={twitchUserName} />
         </div>
-        {/* <Videos userId="512333628" />
-      <Videos userId="512372287" />
-      <Videos userId="512337495" /> */}
+        <h3 className="center-align">Switch Rooms</h3>
+        <div className="stream-thumbs">
+          <Stream
+            twitchUser="df_thelivingroom"
+            switchStream={() => switchStream('df_thelivingroom')}
+          />
+          <Stream
+            twitchUser="df_thebedroom"
+            switchStream={() => switchStream('df_thebedroom')}
+          />
+          <Stream
+            twitchUser="df_thegarage"
+            switchStream={() => switchStream('df_thegarage')}
+          />
+        </div>
       </div>
 
       {isChatHidden ? (

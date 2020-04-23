@@ -6,6 +6,7 @@ const app = express();
 
 const dbPassword = process.env.dbPassword;
 const dbUrl = `mongodb+srv://danielhart:${dbPassword}@cluster0-zfdv9.mongodb.net/test?retryWrites=true&w=majority`;
+
 const client = new MongoClient(dbUrl, {
   useNewUrlParser: true,
   useUnifiedTopology: true,

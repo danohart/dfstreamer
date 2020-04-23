@@ -1,6 +1,5 @@
 import { useQuery } from '@apollo/react-hooks';
 import gql from 'graphql-tag';
-import Stream from './Stream';
 
 import { withData } from '../lib/withData';
 
@@ -51,7 +50,15 @@ function LiveStream(props) {
 
   return (
     <>
-      <h1 className="center-align">{video.display_name}</h1>
+      <h1 className="center-align">
+        {video.display_name == 'df_thelivingroom'
+          ? 'Living Room'
+          : video.display_name == 'df_thebedroom'
+          ? 'Bedroom'
+          : video.display_name == 'df_thegarage'
+          ? 'Garage'
+          : video.display_name}
+      </h1>
       <div className="stream-container">
         <div className="stream-wrapper" key={video.id}>
           <div className="stream">
@@ -64,11 +71,6 @@ function LiveStream(props) {
               allowFullScreen="yes"
             ></iframe>
           </div>
-        </div>
-        <div className="stream-thumbs">
-          <Stream twitchUser="df_thelivingroom" />
-          <Stream twitchUser="df_thebedroom" />
-          <Stream twitchUser="df_thegarage" />
         </div>
       </div>
     </>

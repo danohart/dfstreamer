@@ -1,7 +1,7 @@
-import { useQuery } from "@apollo/react-hooks";
-import gql from "graphql-tag";
+import { useQuery } from '@apollo/react-hooks';
+import gql from 'graphql-tag';
 
-import { withData } from "../lib/withData";
+import { withData } from '../lib/withData';
 
 export const USER_INFO = gql`
   query USER_INFO($twitchUser: String!, $user_id: String!) {
@@ -30,10 +30,13 @@ function Stream(props) {
       </>
     );
   const video = data.twitchUser[0];
-  if (data.twitchUserStream == "")
+  if (data.twitchUserStream == '')
     return (
       <div className="stream-wrapper">
         <img src={video.offline_image_url} />
+        <div className="fullscreen" onClick={props.switchStream}>
+          View Fullscreen
+        </div>
       </div>
     );
   return (

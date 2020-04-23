@@ -13,22 +13,23 @@ const resolvers = {
     },
 
     async signup(parent, args, res, info) {
-      console.log('args', args);
       args.email = args.email.toLowerCase();
       const password = await bcrypt.hash(args.password, 10);
+
       const user = await db.collection('users').insertOne({
         ...args,
         password,
-        permissions: { set: ['USER'] },
+        permissions: ['USER'],
+      }, function(error, response) {
+        if (error) {
+          console.log('Error occurred while inserting');
+          // return
+        } else {
+          const userCreated = response.ops[0];
+          console.log('inserted record', userCreated);
+          return userCreated;
+        }
       });
-      // // create the JWT token for them
-      // const token = jwt.sign({ userId: user.id }, process.env.APP_SECRET);
-      // // We set the jwt as a cookie on the response
-      // res.cookie('token', token, {
-      //   httpOnly: true,
-      //   maxAge: 1000 * 60 * 60 * 24 * 365, // 1 year cookie
-      // });
-      console.log(`User created with email ${args.email}`);
       return args;
     },
   },
