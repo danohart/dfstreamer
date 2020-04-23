@@ -130,7 +130,9 @@ function Home() {
       ) : (
         ''
       )}
-      <Events />
+      <div className={!isChatHidden ? 'events chat-open' : 'events'}>
+        <Events />
+      </div>
       <div className="notifications">
         <Notification twitchUserName={twitchUserName} />
       </div>

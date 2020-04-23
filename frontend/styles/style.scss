@@ -89,6 +89,19 @@ h3 {
   }
 }
 
+.chat-open {
+  width: calc(100% - 440px);
+  margin-left: 0px;
+
+  @include tablet {
+    width: 50%;
+  }
+
+  @include mobile {
+    width: 100%;
+  }
+}
+
 .site-container {
   display: flex;
   flex-direction: column;
@@ -365,6 +378,12 @@ h3 {
 
   &:hover {
     background-color: $black;
+  }
+
+  @include mobile {
+    padding: 10px;
+    font-size: 10px;
+    font-weight: 500;
   }
 }
 
