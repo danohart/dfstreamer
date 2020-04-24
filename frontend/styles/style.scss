@@ -565,11 +565,14 @@ form {
     margin-top: 10px;
     box-shadow: 2px 2px 12px rgba(0, 0, 0, 0.4);
     @include rounded-corners;
-    display: none;
-    transition: all 0.5s ease-in-out;
+    transition: all 1s ease-in-out;
+    opacity: 0;
+    left: -800px;
 
     &.open {
-      display: block;
+      opacity: 1;
+      transition: all ease-out 0.5s;
+      left: 0px;
     }
 
     &-close {

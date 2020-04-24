@@ -18,6 +18,7 @@ function Home() {
   const [twitchUserName, setTwitchUserName] = useState('df_thelivingroom');
   const [name, setName] = useState('');
   const [isSticky, setSticky] = useState(false);
+  const [notification, setNotification] = useState(false);
 
   const handleScroll = () => {
     setSticky(ref.current.getBoundingClientRect().top <= 0);
@@ -38,11 +39,20 @@ function Home() {
 
   const changeUser = (e) => {
     e.preventDefault();
+    Notifications();
     setTwitchUserName(name);
   };
 
+  function Notifications() {
+    setNotification(true);
+    setTimeout(function () {
+      setNotification(false);
+    }, 8000);
+  }
+
   const changeUserSelect = (e) => {
     e.preventDefault();
+    Notifications();
     setTwitchUserName(e.target.value);
   };
   const { loading, data } = useQuery(LIVE_STREAMS);
@@ -50,6 +60,7 @@ function Home() {
 
   const switchStream = (e) => {
     setTwitchUserName(e);
+    Notifications();
     window.scrollTo({
       top: 300,
       left: 100,
@@ -134,7 +145,11 @@ function Home() {
         <Events />
       </div>
       <div className="notifications">
-        <Notification twitchUserName={twitchUserName} />
+        <Notification
+          twitchUserName={twitchUserName}
+          show={notification}
+          isOpen={() => setNotification(false)}
+        />
       </div>
     </>
   );
