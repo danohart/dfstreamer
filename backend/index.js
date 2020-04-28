@@ -12,8 +12,9 @@ const client = new MongoClient(dbUrl, {
   useUnifiedTopology: true,
 });
 client.connect(function(err) {
-  console.log('😎 mongoDB connected');
   db = client.db('dfstreamer');
+  console.log('😎 mongoDB connected');
+  return db;
 });
 
 const resolvers = require('./resolvers');
