@@ -1,21 +1,7 @@
 const express = require('express');
 const { ApolloServer } = require('apollo-server-express');
-const MongoClient = require('mongodb').MongoClient;
 require('now-env');
 const app = express();
-
-const dbPassword = process.env.dbPassword;
-const dbUrl = `mongodb+srv://danielhart:${dbPassword}@cluster0-zfdv9.mongodb.net/test?retryWrites=true&w=majority`;
-
-const client = new MongoClient(dbUrl, {
-  useNewUrlParser: true,
-  useUnifiedTopology: true,
-});
-client.connect(function(err) {
-  db = client.db('dfstreamer');
-  console.log('😎 mongoDB connected');
-  return db;
-});
 
 const resolvers = require('./resolvers');
 const typeDefs = require('./typeDefs');
