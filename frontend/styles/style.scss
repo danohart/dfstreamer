@@ -23,6 +23,12 @@ body {
   }
 }
 
+a,
+a:link {
+  color: $secondary-color;
+  text-decoration: none;
+}
+
 h1,
 h2,
 h3,
@@ -547,6 +553,19 @@ form {
           content: '-';
           margin: 0px 10px;
         }
+      }
+    }
+
+    &-reminder {
+      display: flex;
+      flex-direction: row;
+      align-items: center;
+      margin-top: 10px;
+
+      svg {
+        width: 15px;
+        height: 15px;
+        margin-right: 5px;
       }
     }
   }

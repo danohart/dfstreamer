@@ -1,6 +1,9 @@
 import { useQuery } from '@apollo/react-hooks';
 import gql from 'graphql-tag';
 
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faClock } from '@fortawesome/free-solid-svg-icons';
+
 import { withData } from '../lib/withData';
 
 export const ALL_EVENTS = gql`
@@ -54,6 +57,12 @@ function Events(props) {
         {props.stage === 'df_thegarage' ? 'Garage' : ''}
       </h3>
       {events.map((event) => {
+        const cleanStartTime = event.startTime.split(':').join('');
+        const cleanEndTime = event.endTime.split(':').join('');
+        const GMTstartTime = Number(cleanStartTime) + 500;
+        const GMTendTime = Number(cleanEndTime) + 500;
+        console.log('endTime', GMTendTime);
+
         if (event.host === props.stage)
           return (
             <>
@@ -61,9 +70,7 @@ function Events(props) {
                 className={`event ${props.stage}`}
                 key={event.title}
                 style={{
-                  gridRow: `time-${event.startTime
-                    .split(':')
-                    .join('')} / time-${event.endTime.split(':').join('')}`,
+                  gridRow: `time-${cleanStartTime} / time-${cleanEndTime}`,
                   gridColumn: props.stage,
                 }}
                 key={event.title}
@@ -78,6 +85,15 @@ function Events(props) {
                   <div className="event-time-endTime">
                     {tConvert(event.endTime)}
                   </div>
+                </div>
+                <div className="event-reminder">
+                  <a
+                    href={`http://www.google.com/calendar/event?action=TEMPLATE&dates=20200518T${GMTstartTime}00Z%2F20200518T${GMTendTime}00Z&text=${event.title}%20Reminder!&location=${event.host}&details=Live on distancefest.com`}
+                    target="_blank"
+                  >
+                    <FontAwesomeIcon icon={faClock} />
+                    Remind me
+                  </a>
                 </div>
               </div>
             </>
