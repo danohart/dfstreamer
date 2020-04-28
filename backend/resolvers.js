@@ -12,6 +12,7 @@ const client = new MongoClient(dbUrl, {
   useNewUrlParser: true,
   useUnifiedTopology: true,
 });
+
 client.connect(function(err) {
   db = client.db('dfstreamer');
   console.log('😎 mongoDB connected');
@@ -19,35 +20,6 @@ client.connect(function(err) {
 });
 
 const resolvers = {
-  Mutation: {
-    async createEvent(parent, args, ctx, info) {
-      console.log({ ...args, hello: 'there' });
-      event = await db.collection('schedule').insertOne(args);
-      return args;
-    },
-
-    async signup(parent, args, res, info) {
-      args.email = args.email.toLowerCase();
-      const password = await bcrypt.hash(args.password, 10);
-
-      const user = await db.collection('users').insertOne({
-        ...args,
-        password,
-        permissions: ['USER'],
-      }, function(error, response) {
-        if (error) {
-          console.log('Error occurred while inserting');
-          // return
-        } else {
-          const userCreated = response.ops[0];
-          console.log('inserted record', userCreated);
-          return userCreated;
-        }
-      });
-      return args;
-    },
-  },
-
   Query: {
     events: async () => {
       values = await client
@@ -107,6 +79,35 @@ const resolvers = {
       );
       const twitchVideoInfo = await response.json();
       return twitchVideoInfo.data;
+    },
+  },
+
+  Mutation: {
+    async createEvent(parent, args, ctx, info) {
+      console.log({ ...args, hello: 'there' });
+      event = await db.collection('schedule').insertOne(args);
+      return args;
+    },
+
+    async signup(parent, args, res, info) {
+      args.email = args.email.toLowerCase();
+      const password = await bcrypt.hash(args.password, 10);
+
+      const user = await db.collection('users').insertOne({
+        ...args,
+        password,
+        permissions: ['USER'],
+      }, function(error, response) {
+        if (error) {
+          console.log('Error occurred while inserting');
+          // return
+        } else {
+          const userCreated = response.ops[0];
+          console.log('inserted record', userCreated);
+          return userCreated;
+        }
+      });
+      return args;
     },
   },
 };
