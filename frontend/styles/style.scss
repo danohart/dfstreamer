@@ -103,8 +103,14 @@ h3 {
       width: 100%;
     }
 
-    img {
-      width: 100%;
+    h1 {
+      position: relative;
+      z-index: 10;
+      @include metafizzy(4em, 10s);
+
+      @include mobile {
+        font-size: 2.5em;
+      }
     }
   }
 
