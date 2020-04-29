@@ -39,8 +39,10 @@ function Events(props) {
   if (error)
     return (
       <>
-        <h3>Sorry, there was an error.</h3>
-        <p>{error.message}</p>
+        <div class="error">
+          <h3>Sorry, there was an error.</h3>
+          <p>{error.message}</p>
+        </div>
       </>
     );
 
@@ -61,7 +63,6 @@ function Events(props) {
         const cleanEndTime = event.endTime.split(':').join('');
         const GMTstartTime = Number(cleanStartTime) + 500;
         const GMTendTime = Number(cleanEndTime) + 500;
-        console.log('endTime', GMTendTime);
 
         if (event.host === props.stage)
           return (

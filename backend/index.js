@@ -13,8 +13,9 @@ const server = new ApolloServer({
 
 const PORT = 4444;
 
-app.listen({ port: PORT }, () =>
-  console.log(`🚀 Server is running http://localhost:${PORT}`));
+app.listen(PORT, function() {
+  console.log(`🚀 Server is running http://localhost:${PORT}`);
+});
 
 server.applyMiddleware({ app, path: '*' });
 

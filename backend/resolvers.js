@@ -16,20 +16,14 @@ const client = new MongoClient(dbUrl, {
 client.connect(function(err) {
   db = client.db('dfstreamer');
   console.log('😎 mongoDB connected');
-  return db;
 });
 
 const resolvers = {
   Query: {
     events: async () => {
-      values = await client
-        .db('dfstreamer')
-        .collection('schedule')
-        .find()
-        .toArray()
-        .then(res => {
-          return res;
-        });
+      values = await db.collection('schedule').find().toArray().then(res => {
+        return res;
+      });
       return values;
     },
 
