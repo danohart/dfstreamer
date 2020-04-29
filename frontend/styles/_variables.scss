@@ -3,27 +3,15 @@
 $primary-font: 'Montserrat', sans-serif;
 $secondary-font: 'Hepta Slab', serif;
 
-$primary-color: #f6f5e4;
-$secondary-color: #ce4928;
-$secondary-color-bold: #e1d321;
+$primary-color: #d1f9ff;
+$secondary-color: #ff296d;
+$secondary-color-bold: #05d8e8;
 
-$fest-blue: #286aa0;
+$fest-blue: #005679;
+$fest-blue-alt: #01012a;
 
 $white: #ffffff;
 $black: #000000;
 
 $light-gray: #e2e2e2;
 $dark-gray: #555555;
-
-@mixin slashes {
-  position: relative;
-  &:before {
-    position: absolute;
-    content: '';
-    background-color: $primary-color;
-    transform: rotate(30deg);
-    width: 200px;
-    height: 50px;
-    right: -50px;
-  }
-}

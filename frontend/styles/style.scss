@@ -14,7 +14,7 @@ body {
   font-size: 16px;
   padding: 0px;
   margin: 0px;
-  background-image: url('../public/static/background-dark.png');
+  background-color: $fest-blue-alt;
   background-size: 60%;
 
   @include mobile {
@@ -27,6 +27,11 @@ a,
 a:link {
   color: $secondary-color;
   text-decoration: none;
+  @include ease-transition;
+
+  &:hover {
+    color: darken($color: $secondary-color, $amount: 30);
+  }
 }
 
 h1,
@@ -77,10 +82,14 @@ h3 {
 }
 
 .header {
-  width: 80%;
+  width: 88%;
   max-width: 1440px;
   margin: 120px auto 0px auto;
   text-align: center;
+
+  @include tablet {
+    width: 75%;
+  }
 
   @include mobile {
     width: 90%;
@@ -88,7 +97,7 @@ h3 {
   }
 
   .welcome {
-    width: 80%;
+    width: 100%;
 
     @include mobile {
       width: 100%;
@@ -534,9 +543,15 @@ form {
   .event {
     display: flex;
     flex-direction: column;
-    border: 2px solid $fest-blue;
+    border: 2px solid $secondary-color-bold;
     padding: 20px;
     margin: 2px;
+    @include ease-transition;
+
+    &:hover {
+      color: $fest-blue-alt;
+      background-color: $secondary-color-bold;
+    }
 
     &-title {
       h3 {
@@ -651,7 +666,7 @@ form {
       text-decoration: none;
 
       &:hover {
-        color: $dark-gray;
+        color: $secondary-color-bold;
       }
       svg {
         height: 40px;
