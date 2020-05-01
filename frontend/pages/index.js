@@ -97,7 +97,9 @@ function Home() {
         <div className={`sticky-wrapper${isSticky ? ' sticky' : ''}`} ref={ref}>
           <LiveStream twitchUser={twitchUserName} />
         </div>
-        <h3 className="center-align">Switch Rooms</h3>
+        <h3 className="center-align" data-text="Switch Rooms">
+          Switch Rooms
+        </h3>
         <div className="stream-thumbs">
           <Stream
             twitchUser="df_thelivingroom"

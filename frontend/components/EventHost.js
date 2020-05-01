@@ -51,6 +51,15 @@ function Events(props) {
   return (
     <>
       <h3
+        data-text={
+          props.stage === 'df_thelivingroom'
+            ? 'Living Room'
+            : props.stage === 'df_thebedroom'
+            ? 'Bedroom'
+            : props.stage === 'df_thegarage'
+            ? 'Garage'
+            : ''
+        }
         className="center-align"
         style={{ gridColumn: `${props.stage}`, gridRow: 'tracks' }}
       >

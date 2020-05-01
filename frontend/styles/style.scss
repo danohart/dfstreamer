@@ -76,8 +76,18 @@ h2 {
 
 h3 {
   font-size: 2.2em;
+
+  &:hover {
+    @include glitch;
+  }
+
   @include tablet {
     font-size: 1.2em;
+    @include glitch;
+  }
+
+  @include mobile {
+    @include glitch;
   }
 }
 
