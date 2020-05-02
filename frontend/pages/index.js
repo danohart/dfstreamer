@@ -1,12 +1,8 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { useQuery } from '@apollo/react-hooks';
 import gql from 'graphql-tag';
-import Videos from '../components/Videos';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import {
-  faTimes,
-  faChevronCircleDown,
-} from '@fortawesome/free-solid-svg-icons';
+import { faTimes } from '@fortawesome/free-solid-svg-icons';
 import LiveStream from '../components/LiveStream';
 import Stream from '../components/Stream';
 import Events from '../components/Events';
@@ -16,7 +12,7 @@ function Home() {
   const ref = useRef('');
   const [isChatHidden, setChatHidden] = useState(true);
   const [twitchUserName, setTwitchUserName] = useState('df_thelivingroom');
-  const [name, setName] = useState('');
+
   const [isSticky, setSticky] = useState(false);
   const [notification, setNotification] = useState(false);
 
@@ -32,17 +28,6 @@ function Home() {
     };
   }, []);
 
-  const handleChange = (e) => {
-    const { value } = e.target;
-    setName(value);
-  };
-
-  const changeUser = (e) => {
-    e.preventDefault();
-    Notifications();
-    setTwitchUserName(name);
-  };
-
   function Notifications() {
     setNotification(true);
     setTimeout(function () {
@@ -50,11 +35,6 @@ function Home() {
     }, 8000);
   }
 
-  const changeUserSelect = (e) => {
-    e.preventDefault();
-    Notifications();
-    setTwitchUserName(e.target.value);
-  };
   const { loading, data } = useQuery(LIVE_STREAMS);
   if (loading) return <p>Waiting</p>;
 
@@ -71,29 +51,6 @@ function Home() {
   return (
     <>
       <div className={!isChatHidden ? 'home chat-open' : 'home'}>
-        <form onSubmit={changeUser}>
-          <div className="user-field">
-            <input
-              type="text"
-              placeholder="Enter a username"
-              value={name}
-              onChange={handleChange.bind(this)}
-            />
-            <input type="submit" />
-          </div>
-        </form>
-        <div className="stream-dropdown">
-          <label htmlFor="live-streams">Pick a Stream</label>
-          <select id="live-streams" onChange={changeUserSelect}>
-            <option>Live Streams</option>
-            {data.twitchUserStream.map((user) => (
-              <option key={user.user_name}>{user.user_name}</option>
-            ))}
-          </select>
-          <div className="dropdown-icon">
-            <FontAwesomeIcon icon={faChevronCircleDown} />
-          </div>
-        </div>
         <div className={`sticky-wrapper${isSticky ? ' sticky' : ''}`} ref={ref}>
           <LiveStream twitchUser={twitchUserName} />
         </div>
@@ -143,9 +100,9 @@ function Home() {
       ) : (
         ''
       )}
-      <div className={!isChatHidden ? 'events chat-open' : 'events'}>
+      {/* <div className={!isChatHidden ? 'events chat-open' : 'events'}>
         <Events />
-      </div>
+      </div> */}
       <div className="notifications">
         <Notification
           twitchUserName={twitchUserName}
