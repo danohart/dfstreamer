@@ -44,6 +44,8 @@ h5 {
   padding: 0px;
   line-height: 0.95em;
   font-weight: 800;
+  color: $primary-color;
+  text-shadow: 2px 4px $secondary-color-bold;
 }
 
 h1 {
@@ -98,6 +100,7 @@ h3 {
   text-align: center;
   display: flex;
   flex-direction: column;
+  align-items: center;
 
   @include tablet {
     width: 75%;
@@ -110,6 +113,9 @@ h3 {
 
   .welcome {
     width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
 
     @include mobile {
       width: 100%;
@@ -118,6 +124,7 @@ h3 {
     h1 {
       position: relative;
       z-index: 10;
+      @include glitch;
       @include metafizzy(4em, 10s);
 
       @include mobile {
@@ -129,6 +136,7 @@ h3 {
   h2 {
     font-weight: 300;
     font-size: 36px;
+    text-shadow: none;
 
     @include mobile {
       font-size: 24px;
@@ -574,6 +582,7 @@ form {
     &-title {
       h3 {
         margin: 0;
+        text-shadow: none;
       }
     }
 
@@ -607,6 +616,57 @@ form {
   .error {
     display: block;
     width: 100%;
+  }
+}
+
+.submission {
+  width: 80%;
+
+  &-title {
+    margin-bottom: 20px;
+    width: 80%;
+    margin: 20px auto;
+
+    img {
+      width: 100%;
+      height: auto;
+    }
+  }
+
+  &-form {
+    width: 100%;
+
+    form {
+      width: 100%;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-evenly;
+      flex-wrap: wrap;
+
+      input,
+      textarea {
+        font-size: 18px;
+        margin: 10px 0px;
+        padding: 10px;
+      }
+
+      label {
+        display: flex;
+        flex-direction: column;
+      }
+
+      input[type='submit'] {
+        appearance: none;
+        @include button;
+      }
+    }
+
+    &-group {
+      display: flex;
+      flex-direction: column;
+      flex-wrap: wrap;
+      width: 50%;
+    }
   }
 }
 
