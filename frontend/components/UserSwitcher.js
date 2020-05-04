@@ -20,12 +20,7 @@ export default function UserSwitcher() {
   <>
     <form onSubmit={changeUser}>
       <div className="user-field">
-        <input
-          type="text"
-          placeholder="Enter a username"
-          value={name}
-          onChange={handleChange.bind(this)}
-        />
+        <input type="text" placeholder="Enter a username" value={name} />
         <input type="submit" />
       </div>
     </form>

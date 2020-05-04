@@ -10,7 +10,7 @@ const dbUrl = `mongodb+srv://danielhart:${dbPassword}@cluster0-zfdv9.mongodb.net
 
 const client = new MongoClient(dbUrl, {
   useNewUrlParser: true,
-  // useUnifiedTopology: true,
+  useUnifiedTopology: true,
 });
 
 client.connect(function(err) {

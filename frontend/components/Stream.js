@@ -29,29 +29,25 @@ function Stream(props) {
         <p>{error.message}</p>
       </>
     );
-  const video = data.twitchUser[0];
-  if (data.twitchUserStream == '')
-    return (
-      <div className="stream-wrapper">
-        <img src={video.offline_image_url} />
-        <div className="fullscreen" onClick={props.switchStream}>
-          View Fullscreen
-        </div>
-      </div>
-    );
+  const video = props.twitchUser;
+
   return (
     <>
       <div className="stream-wrapper" key={video.id}>
         <div className="stream">
-          <iframe
-            src={`https://player.twitch.tv/?channel=${video.display_name}&parent=distancefest.com&autoplay=false`}
-            height="300"
-            width="900"
-            frameBorder="0"
-            scrolling="no"
-          ></iframe>
+          <div className="video">
+            <iframe
+              src={`https://player.twitch.tv/?channel=${video}&parent=distancefest.com&autoplay=false`}
+              height="300"
+              width="900"
+              frameBorder="0"
+              scrolling="no"
+            ></iframe>
+          </div>
         </div>
-        <div className="fullscreen">View Fullscreen</div>
+        <div className="fullscreen" onClick={props.switchStream}>
+          View Fullscreen
+        </div>
       </div>
     </>
   );

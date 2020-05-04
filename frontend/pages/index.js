@@ -2,6 +2,11 @@ import React from 'react';
 import LiveStream from '../components/LiveStream';
 
 function Home() {
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    alert('This did nothing.');
+  };
+
   return (
     <>
       <div className={'home'}>
@@ -13,7 +18,7 @@ function Home() {
             <img src="/static/Artist-Submissions.png" />
           </div>
           <div className="submission-form">
-            <form>
+            <form onSubmit={handleSubmit}>
               <label>
                 Artist Name
                 <input type="text" placeholder="Artist Name" />

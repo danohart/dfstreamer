@@ -37,33 +37,24 @@ function LiveStream(props) {
       </>
     );
 
-  if (!data.twitchUser || !data.twitchUser.length)
-    return (
-      <div className="stream-container">
-        <div className="stream-wrapper">
-          <h2>No user {props.twitchUser}. Please try again.</h2>
-        </div>
-      </div>
-    );
-
-  const video = data.twitchUser[0];
+  const video = props.twitchUser;
 
   return (
     <>
       <h1 className="center-align">
-        {video.display_name == 'df_thelivingroom'
+        {video == 'df_thelivingroom'
           ? 'Living Room'
-          : video.display_name == 'df_thebedroom'
+          : video == 'df_thebedroom'
           ? 'Bedroom'
-          : video.display_name == 'df_thegarage'
+          : video == 'df_thegarage'
           ? 'Garage'
-          : video.display_name}
+          : video}
       </h1>
       <div className="stream-container">
         <div className="stream-wrapper" key={video.id}>
           <div className="stream">
             <iframe
-              src={`https://player.twitch.tv/?channel=${video.display_name}&parent=distancefest.com&autoplay=true&muted=false`}
+              src={`https://player.twitch.tv/?channel=${video}&parent=distancefest.com&autoplay=true&muted=false`}
               height="300"
               width="900"
               frameBorder="0"
