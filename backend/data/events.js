@@ -1,4 +1,4 @@
-[
+const events = [
   {
     title: 'Weezer',
     host: 'df_thelivingroom',
@@ -21,3 +21,5 @@
     endTime: '18:00',
   },
 ];
+
+module.exports = events;

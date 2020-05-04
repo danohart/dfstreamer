@@ -18,13 +18,55 @@ client.connect(function(err) {
   console.log('😎 mongoDB connected');
 });
 
+const events = [
+  {
+    title: 'Weezer',
+    host: 'df_thelivingroom',
+    date: '05012020',
+    startTime: '14:00',
+    endTime: '14:30',
+  },
+  {
+    title: 'The Strokes',
+    host: 'df_thebedroom',
+    date: '05012020',
+    startTime: '14:30',
+    endTime: '16:00',
+  },
+  {
+    title: 'Run The Jewels',
+    host: 'df_thegarage',
+    date: '05012020',
+    startTime: '16:00',
+    endTime: '18:00',
+  },
+  {
+    title: 'Weezer',
+    host: 'df_thelivingroom',
+    date: '05012020',
+    startTime: '16:00',
+    endTime: '17:00',
+  },
+  {
+    title: 'The Strokes',
+    host: 'df_thebedroom',
+    date: '05012020',
+    startTime: '17:00',
+    endTime: '17:30',
+  },
+  {
+    title: 'Run The Jewels',
+    host: 'df_thelivingroom',
+    date: '05012020',
+    startTime: '17:30',
+    endTime: '19:00',
+  },
+];
+
 const resolvers = {
   Query: {
-    events: async () => {
-      values = await db.collection('schedule').find().toArray().then(res => {
-        return res;
-      });
-      return values;
+    events() {
+      return events;
     },
 
     async twitchUser(parent, args) {
