@@ -117,6 +117,11 @@ h3 {
     flex-direction: column;
     align-items: center;
 
+    img {
+      width: 100%;
+      height: auto;
+    }
+
     @include mobile {
       width: 100%;
     }
@@ -168,7 +173,6 @@ h3 {
 
     .home {
       width: 100%;
-      padding-top: 50px;
       margin: 0px auto;
       display: flex;
       flex-direction: column;
@@ -229,6 +233,20 @@ h3 {
             }
           }
         }
+      }
+    }
+
+    .schedule {
+      background-color: $fest-blue;
+      padding: 160px 0px;
+      text-align: center;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+
+      img {
+        width: 50%;
+        height: auto;
       }
     }
 
@@ -733,10 +751,43 @@ form {
   }
 }
 
+.countdown {
+  position: relative;
+  overflow: hidden;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-evenly;
+  width: 100%;
+  margin: 20px auto;
+  padding: 20% 0;
+  border-top: 20px solid $secondary-color;
+  border-bottom: 20px solid $secondary-color;
+  margin-bottom: 60px;
+
+  &-time {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    z-index: 2;
+
+    &-digit {
+      font-size: 120px;
+      text-shadow: 2px 3px $secondary-color-bold;
+
+      @include mobile {
+        font-size: 48px;
+      }
+    }
+
+    &-interval {
+      font-weight: 300;
+    }
+  }
+}
+
 .footer {
   min-height: 80px;
   padding: 20px 0px;
-  margin-top: 20px;
   background-color: $secondary-color;
   text-align: center;
 

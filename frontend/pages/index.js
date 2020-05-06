@@ -1,23 +1,25 @@
 import React from 'react';
-import LiveStream from '../components/LiveStream';
+import Countdown from '../components/Countdown';
 
 function Home() {
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    alert('This did nothing.');
-  };
-
   return (
     <>
-      <div className={'home'}>
-        {/* <div className={`sticky-wrapper`}>
-          <LiveStream twitchUser={'danohart'} />
-        </div> */}
+      <div className="home">
+        <Countdown />
         <div className="submission">
           <div className="submission-title">
             <img src="/static/Artist-Submissions.png" />
           </div>
-          <div className="submission-form">
+          <iframe
+            height="800"
+            title="Embedded Form"
+            allowtransparency="true"
+            frameborder="0"
+            scrolling="no"
+            style={{ width: '100%', border: 'none', color: 'white' }}
+            src="https://danohart.wufoo.com/embed/qxlil4n1bcmypk/"
+          ></iframe>
+          {/* <div className="submission-form">
             <form onSubmit={handleSubmit}>
               <label>
                 Artist Name
@@ -47,8 +49,12 @@ function Home() {
               </label>
               <input type="submit" value="Submit" />
             </form>
-          </div>
+          </div> */}
         </div>
+      </div>
+      <div className="schedule">
+        <img src="../static/Schedule.png" />
+        <h3 data-text="Coming Soon!">Coming Soon!</h3>
       </div>
     </>
   );
