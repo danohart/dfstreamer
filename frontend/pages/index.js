@@ -8,7 +8,9 @@ function Home() {
         <Countdown />
         <div className="submission">
           <div className="submission-title">
-            <img src="/static/Artist-Submissions.png" />
+            <h2 className="center-align" data-text="Artist Submissions">
+              Artist Submissions
+            </h2>
           </div>
           <iframe
             height="800"

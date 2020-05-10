@@ -232,6 +232,27 @@ a.button {
   }
 }
 
+@mixin shift-text {
+  position: relative;
+  letter-spacing: 4px;
+  filter: blur(0.6px);
+
+  &:before {
+    content: attr(data-text);
+    position: absolute;
+    top: 0;
+    left: -5px;
+    width: 101.8%;
+    clip-path: inset(19px 0px 20px 0px);
+    background-color: $fest-blue-alt;
+    letter-spacing: 4px;
+
+    @include mobile {
+      left: 1px;
+    }
+  }
+}
+
 // Media Queries
 $mobile-width: 300px;
 $tablet-width: 767px;

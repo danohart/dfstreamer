@@ -45,7 +45,7 @@ h5 {
   line-height: 0.95em;
   font-weight: 800;
   color: $primary-color;
-  text-shadow: 2px 4px $secondary-color-bold;
+  text-shadow: -3px -2px $secondary-color-bold;
 }
 
 h1 {
@@ -72,6 +72,10 @@ h2 {
   font-size: 3.4em;
 
   @include tablet {
+    font-size: 2.4em;
+  }
+
+  @include mobile {
     font-size: 2.4em;
   }
 }
@@ -127,9 +131,12 @@ h3 {
     }
 
     h1 {
-      position: relative;
       z-index: 10;
-      @include glitch;
+      @include shift-text;
+
+      a {
+        color: $primary-color;
+      }
     }
   }
 
@@ -244,9 +251,17 @@ h3 {
       flex-direction: column;
       align-items: center;
 
+      h2 {
+        @include shift-text;
+      }
+
       img {
         width: 50%;
         height: auto;
+
+        @include mobile {
+          width: 90%;
+        }
       }
     }
 
@@ -656,6 +671,15 @@ form {
     width: 80%;
     margin: 20px auto;
 
+    h2 {
+      text-transform: uppercase;
+      @include shift-text;
+    }
+
+    @include mobile {
+      width: 100%;
+    }
+
     img {
       width: 100%;
       height: auto;
@@ -763,6 +787,11 @@ form {
   border-top: 20px solid $secondary-color;
   border-bottom: 20px solid $secondary-color;
   margin-bottom: 60px;
+
+  @include mobile {
+    border-top-width: 5px;
+    border-bottom-width: 5px;
+  }
 
   &-time {
     display: flex;
