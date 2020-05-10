@@ -6,7 +6,7 @@ function Page(props) {
   return (
     <div className="site-container">
       <Head>
-        <title>Distance Fest Streamer</title>
+        <title>Distance Fest // May 16-17 : Live Music from Safe Spaces</title>
         <link rel="icon" type="icon" href="/favicon.png"></link>
       </Head>
       <Header />

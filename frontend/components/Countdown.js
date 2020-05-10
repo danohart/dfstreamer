@@ -47,6 +47,7 @@ export default function CountdownTimer() {
           autoPlay
           muted
           loop
+          playsInline
           style={{
             position: 'absolute',
             width: '100%',
