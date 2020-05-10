@@ -2,8 +2,11 @@ import Head from 'next/head';
 import Header from './Header';
 import Footer from './Footer';
 import ReactGA from 'react-ga';
-ReactGA.initialize('UA-27102802-6');
-ReactGA.pageview(window.location.pathname + window.location.search);
+
+if (typeof window !== 'undefined') {
+  ReactGA.initialize('UA-27102802-6');
+  ReactGA.pageview(window.location.pathname + window.location.search);
+}
 
 function Page(props) {
   return (
