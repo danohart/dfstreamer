@@ -235,7 +235,6 @@ a.button {
 @mixin shift-text {
   position: relative;
   letter-spacing: 4px;
-  filter: blur(0.6px);
 
   &:before {
     content: attr(data-text);
