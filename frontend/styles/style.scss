@@ -408,12 +408,16 @@ h3 {
   }
 
   .stream-wrapper {
-    background-color: $secondary-color-bold;
+    // background-color: $secondary-color-bold;
     width: 29%;
     display: flex;
     flex-direction: column;
     align-content: center;
     justify-content: center;
+
+    h4 {
+      text-shadow: none;
+    }
 
     .video {
       padding-bottom: 62.51%;
@@ -681,8 +685,11 @@ form {
   grid-template-rows:
     [tracks] auto
     [time-1530] 1fr
+    [time-1545] 1fr
     [time-1600] 1fr
+    [time-1615] 1fr
     [time-1630] 1fr
+    [time-1645] 1fr
     [time-1700] 1fr
     [time-1715] 1fr
     [time-1730] 1fr

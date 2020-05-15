@@ -33,19 +33,28 @@ function Stream(props) {
 
   return (
     <>
-      <div className="stream-wrapper" key={video.id}>
-        <div className="stream">
-          <div className="video">
+      <div className='stream-wrapper' key={video.id}>
+        <h4 className='title center-align'>
+          {video == 'df_thelivingroom'
+            ? 'Living Room'
+            : video == 'df_thebedroom'
+            ? 'Bedroom'
+            : video == 'df_thegarage'
+            ? 'Garage'
+            : video}
+        </h4>
+        <div className='stream'>
+          <div className='video'>
             <iframe
               src={`https://player.twitch.tv/?channel=${video}&parent=distancefest.com&autoplay=false`}
-              height="300"
-              width="900"
-              frameBorder="0"
-              scrolling="no"
+              height='300'
+              width='900'
+              frameBorder='0'
+              scrolling='no'
             ></iframe>
           </div>
         </div>
-        <div className="fullscreen" onClick={props.switchStream}>
+        <div className='fullscreen' onClick={props.switchStream}>
           View Fullscreen
         </div>
       </div>
