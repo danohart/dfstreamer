@@ -55,30 +55,44 @@ function Live() {
         <title>Live - Distance Fest</title>
       </Head>
       <div className={!isChatHidden ? 'home chat-open' : 'home'}>
+        <div className='header'>
+          <div className='welcome center-align'>
+            {/* <a href="/">
+          <img src="../static/Welcome.png" />
+        </a> */}
+            <h1 data-text='Welcome To Distance Fest'>
+              <a href='/'>Welcome To Distance Fest</a>
+            </h1>
+          </div>
+          <h2>Live Music from Safe Spaces</h2>
+          <h3 className='center-align' data-text='May 16-17'>
+            May 16-17
+          </h3>
+        </div>
         <div className={`sticky-wrapper${isSticky ? ' sticky' : ''}`} ref={ref}>
           <LiveStream twitchUser={twitchUserName} />
         </div>
-        <h3 className="center-align" data-text="Switch Rooms">
+        <h3 className='center-align' data-text='Switch Rooms'>
           Switch Rooms
         </h3>
-        <div className="stream-thumbs">
+        <div className='stream-thumbs'>
           <Stream
-            twitchUser="df_thelivingroom"
+            twitchUser='df_thelivingroom'
             switchStream={() => switchStream('df_thelivingroom')}
           />
           <Stream
-            twitchUser="df_thebedroom"
+            twitchUser='df_thebedroom'
             switchStream={() => switchStream('df_thebedroom')}
           />
           <Stream
-            twitchUser="df_thegarage"
+            twitchUser='df_thegarage'
             switchStream={() => switchStream('df_thegarage')}
           />
         </div>
       </div>
 
       {isChatHidden ? (
-        <div className="chat-tab" onClick={() => setChatHidden(false)}>
+        <div className='chat-tab' onClick={() => setChatHidden(false)}>
           Chat
         </div>
       ) : (
@@ -86,18 +100,18 @@ function Live() {
       )}
 
       {!isChatHidden ? (
-        <div className="chat-container expanded">
-          <div className="close-chat" onClick={() => setChatHidden(true)}>
+        <div className='chat-container expanded'>
+          <div className='close-chat' onClick={() => setChatHidden(true)}>
             <FontAwesomeIcon icon={faTimes} /> Close Chat
           </div>
-          <div className="chat">
+          <div className='chat'>
             <iframe
               src={`https://www.twitch.tv/embed/${twitchUserName}/chat?parent=distancefest.com`}
-              height="900"
-              width="400"
-              frameBorder="0"
-              scrolling="yes"
-              id="chat_embed"
+              height='900'
+              width='400'
+              frameBorder='0'
+              scrolling='yes'
+              id='chat_embed'
             ></iframe>
           </div>
         </div>
@@ -107,7 +121,7 @@ function Live() {
       <div className={!isChatHidden ? 'events chat-open' : 'events'}>
         <Events />
       </div>
-      <div className="notifications">
+      <div className='notifications'>
         <Notification
           twitchUserName={twitchUserName}
           show={notification}

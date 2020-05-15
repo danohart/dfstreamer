@@ -10,13 +10,13 @@ if (typeof window !== 'undefined') {
 
 function Page(props) {
   return (
-    <div className="site-container">
+    <div className='site-container'>
       <Head>
         <title>Distance Fest // May 16-17 : Live Music from Safe Spaces</title>
-        <link rel="icon" type="icon" href="/favicon.png"></link>
+        <link rel='icon' type='icon' href='/favicon.png'></link>
       </Head>
-      <Header />
-      <div className="main">{props.children}</div>
+      {/* <Header /> */}
+      <div className='main'>{props.children}</div>
       <Footer />
     </div>
   );

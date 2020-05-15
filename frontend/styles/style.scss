@@ -568,29 +568,150 @@ form {
 .events-container {
   display: grid;
   grid-template-rows:
-    [tracks] auto /* Foreshadowing! */
-    [time-1400] 1fr
-    [time-1430] 1fr
-    [time-1500] 1fr
+    [tracks] auto
+    // [time-1400] 1fr
+    // [time-1430] 1fr
+    // [time-1500] 1fr
+    // [time-1530] 1fr
+    // [time-1600] 1fr
+    // [time-1630] 1fr
+    [time-1700] 1fr
+    [time-1715] 1fr
+    [time-1730] 1fr
+    [time-1745] 1fr
+    [time-1800] 1fr
+    [time-1815] 1fr
+    [time-1830] 1fr
+    [time-1845] 1fr
+    [time-1900] 1fr
+    [time-1915] 1fr
+    [time-1930] 1fr
+    [time-1945] 1fr
+    [time-2000] 1fr
+    [time-2015] 1fr
+    [time-2030] 1fr
+    [time-2045] 1fr
+    [time-2100] 1fr
+    [time-2115] 1fr
+    [time-2130] 1fr
+    [time-2145] 1fr
+    [time-2200] 1fr
+    [time-2215] 1fr
+    [time-2230] 1fr
+    [time-2245] 1fr
+    [time-2300] 1fr
+    [time-2315] 1fr
+    [time-2330] 1fr
+    [time-2345] 1fr
+    [time-0000] 1fr;
+
+  grid-template-columns:
+    [times] 4em
+    [df_thelivingroom-start] 1fr
+    [df_thelivingroom-end df_thebedroom-start] 1fr
+    [df_thebedroom-end df_thegarage-start] 1fr
+    [df_thegarage-end];
+
+  @include mobile {
+    display: flex;
+    flex-direction: column;
+    margin-top: 10px;
+  }
+
+  .time-slot {
+    grid-column: times;
+    font-size: 0.75em;
+  }
+
+  .event {
+    display: flex;
+    flex-direction: column;
+    border: 2px solid $secondary-color-bold;
+    padding: 20px;
+    margin: 2px;
+    @include ease-transition;
+
+    &:hover {
+      color: $fest-blue-alt;
+      background-color: $secondary-color-bold;
+    }
+
+    &-title {
+      h3 {
+        margin: 0;
+        text-shadow: none;
+      }
+    }
+
+    &-time {
+      display: flex;
+      flex-direction: row;
+      align-items: center;
+
+      &-endTime {
+        &:before {
+          content: '-';
+          margin: 0px 10px;
+        }
+      }
+    }
+
+    &-reminder {
+      display: flex;
+      flex-direction: row;
+      align-items: center;
+      margin-top: 10px;
+
+      svg {
+        width: 15px;
+        height: 15px;
+        margin-right: 5px;
+      }
+    }
+  }
+
+  .error {
+    display: block;
+    width: 100%;
+  }
+}
+
+.events-container2 {
+  display: grid;
+  grid-template-rows:
+    [tracks] auto
     [time-1530] 1fr
     [time-1600] 1fr
     [time-1630] 1fr
     [time-1700] 1fr
+    [time-1715] 1fr
     [time-1730] 1fr
+    [time-1745] 1fr
     [time-1800] 1fr
+    [time-1815] 1fr
     [time-1830] 1fr
+    [time-1845] 1fr
     [time-1900] 1fr
+    [time-1915] 1fr
     [time-1930] 1fr
+    [time-1945] 1fr
     [time-2000] 1fr
+    [time-2015] 1fr
     [time-2030] 1fr
+    [time-2045] 1fr
     [time-2100] 1fr
+    [time-2115] 1fr
     [time-2130] 1fr
+    [time-2145] 1fr
     [time-2200] 1fr
+    [time-2215] 1fr
     [time-2230] 1fr
+    [time-2245] 1fr
     [time-2300] 1fr
+    [time-2315] 1fr
     [time-2330] 1fr
-    [time-0000] 1fr
-    [time-0030] 1fr;
+    [time-2345] 1fr
+    [time-0000] 1fr;
 
   grid-template-columns:
     [times] 4em
