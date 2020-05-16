@@ -29,6 +29,15 @@ function Live() {
     };
   }, []);
 
+  function chatPopup() {
+    isChatHidden === false ? setChatHidden(true) : setChatHidden(false);
+    if (isChatHidden === true)
+      window.scrollTo({
+        top: 450,
+        behavior: 'smooth',
+      });
+  }
+
   function Notifications() {
     setNotification(true);
     setTimeout(function () {
@@ -92,7 +101,7 @@ function Live() {
       </div>
 
       {isChatHidden ? (
-        <div className='chat-tab' onClick={() => setChatHidden(false)}>
+        <div className='chat-tab' onClick={() => chatPopup()}>
           Chat
         </div>
       ) : (
@@ -101,7 +110,7 @@ function Live() {
 
       {!isChatHidden ? (
         <div className='chat-container expanded'>
-          <div className='close-chat' onClick={() => setChatHidden(true)}>
+          <div className='close-chat' onClick={() => chatPopup()}>
             <FontAwesomeIcon icon={faTimes} /> Close Chat
           </div>
           <div className='chat'>
