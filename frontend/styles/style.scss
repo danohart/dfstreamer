@@ -420,6 +420,21 @@ h3 {
       text-shadow: none;
     }
 
+    .stream {
+      &.fullscreened .video {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        padding: 38% 0px;
+        text-transform: uppercase;
+        background-color: $fest-blue;
+
+        @include mobile {
+          font-size: 12px;
+        }
+      }
+    }
+
     .video {
       padding-bottom: 62.51%;
       position: relative;

@@ -46,7 +46,7 @@ function Stream(props) {
         <div className='stream'>
           <div className='video'>
             <iframe
-              src={`https://player.twitch.tv/?channel=${video}&parent=distancefest.com&autoplay=false`}
+              src={`https://player.twitch.tv/?channel=${video}&parent=distancefest.com&autoplay=true&muted=true`}
               height='300'
               width='900'
               frameBorder='0'
