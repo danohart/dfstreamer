@@ -27,7 +27,7 @@ const events = [
     endTime: '17:30',
   },
   {
-    title: 'Sam Heinrichson',
+    title: 'Sam Hinrichsen',
     host: 'df_thegarage',
     date: '05162020',
     startTime: '17:30',
@@ -62,7 +62,7 @@ const events = [
     endTime: '20:30',
   },
   {
-    title: 'b lowd',
+    title: 'B Löwd',
     host: 'df_thegarage',
     date: '05162020',
     startTime: '20:30',
@@ -135,7 +135,7 @@ const events2 = [
     endTime: '18:30',
   },
   {
-    title: '??? (YBC Tha Nerd)',
+    title: '???',
     host: 'df_thegarage',
     date: '05172020',
     startTime: '18:30',

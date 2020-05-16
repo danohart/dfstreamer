@@ -1,10 +1,60 @@
-import React from 'react';
-import Countdown from '../components/Countdown';
+import React, { useState, useEffect, useRef } from 'react';
+import Head from 'next/head';
+import { useQuery } from '@apollo/react-hooks';
+import gql from 'graphql-tag';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faTimes } from '@fortawesome/free-solid-svg-icons';
+import LiveStream from '../components/LiveStream';
+import Stream from '../components/Stream';
+import Events from '../components/Events';
+import Notification from '../components/Notification';
 
-function Home() {
+function Live() {
+  const ref = useRef('');
+  const [isChatHidden, setChatHidden] = useState(true);
+  const [twitchUserName, setTwitchUserName] = useState('df_thelivingroom');
+
+  const [isSticky, setSticky] = useState(false);
+  const [notification, setNotification] = useState(false);
+
+  const handleScroll = () => {
+    setSticky(ref.current.getBoundingClientRect().top <= 0);
+  };
+
+  useEffect(() => {
+    window.addEventListener('scroll', handleScroll);
+
+    return () => {
+      window.removeEventListener('scroll', () => handleScroll);
+    };
+  }, []);
+
+  function Notifications() {
+    setNotification(true);
+    setTimeout(function () {
+      setNotification(false);
+    }, 8000);
+  }
+
+  const { loading, data } = useQuery(LIVE_STREAMS);
+  if (loading) return <p>Waiting</p>;
+
+  const switchStream = (e) => {
+    setTwitchUserName(e);
+    Notifications();
+    window.scrollTo({
+      top: 300,
+      left: 100,
+      behavior: 'smooth',
+    });
+  };
+
   return (
     <>
-      <div className='home'>
+      <Head>
+        <title>Live - Distance Fest</title>
+      </Head>
+      <div className={!isChatHidden ? 'home chat-open' : 'home'}>
         <div className='header'>
           <div className='welcome center-align'>
             {/* <a href="/">
@@ -19,61 +69,75 @@ function Home() {
             May 16-17
           </h3>
         </div>
-        <Countdown />
-        <div className='submission'>
-          <div className='submission-title'>
-            <h2 className='center-align' data-text='Artist Submissions'>
-              Artist Submissions
-            </h2>
-          </div>
-          <iframe
-            height='800'
-            title='Embedded Form'
-            allowtransparency='true'
-            frameBorder='0'
-            scrolling='no'
-            style={{ width: '100%', border: 'none', color: 'white' }}
-            src='https://danohart.wufoo.com/embed/qxlil4n1bcmypk/'
-          ></iframe>
-          {/* <div className="submission-form">
-            <form onSubmit={handleSubmit}>
-              <label>
-                Artist Name
-                <input type="text" placeholder="Artist Name" />
-              </label>
-              <label>
-                Contact Name
-                <input type="text" placeholder="Contact Name" />
-              </label>
-              <label>
-                Email
-                <input type="text" placeholder="Email" />
-              </label>
-              <label>
-                Genre
-                <input type="text" placeholder="Genre" />
-              </label>
-              <label>Bio</label>
-              <textarea placeholder="Bio" />
-              <label>
-                Website
-                <input type="text" placeholder="Website" />
-              </label>
-              <label>
-                City
-                <input type="text" placeholder="City" />
-              </label>
-              <input type="submit" value="Submit" />
-            </form>
-          </div> */}
+        <div className={`sticky-wrapper${isSticky ? ' sticky' : ''}`} ref={ref}>
+          <LiveStream twitchUser={twitchUserName} />
+        </div>
+        <h3 className='center-align' data-text='Switch Rooms'>
+          Switch Rooms
+        </h3>
+        <div className='stream-thumbs'>
+          <Stream
+            twitchUser='df_thelivingroom'
+            switchStream={() => switchStream('df_thelivingroom')}
+          />
+          <Stream
+            twitchUser='df_thebedroom'
+            switchStream={() => switchStream('df_thebedroom')}
+          />
+          <Stream
+            twitchUser='df_thegarage'
+            switchStream={() => switchStream('df_thegarage')}
+          />
         </div>
       </div>
-      <div className='schedule'>
-        <img src='../static/Schedule.png' />
-        <h3 data-text='Coming Soon!'>Coming Soon!</h3>
+
+      {isChatHidden ? (
+        <div className='chat-tab' onClick={() => setChatHidden(false)}>
+          Chat
+        </div>
+      ) : (
+        ''
+      )}
+
+      {!isChatHidden ? (
+        <div className='chat-container expanded'>
+          <div className='close-chat' onClick={() => setChatHidden(true)}>
+            <FontAwesomeIcon icon={faTimes} /> Close Chat
+          </div>
+          <div className='chat'>
+            <iframe
+              src={`https://www.twitch.tv/embed/${twitchUserName}/chat?parent=distancefest.com`}
+              height='900'
+              width='400'
+              frameBorder='0'
+              scrolling='yes'
+              id='chat_embed'
+            ></iframe>
+          </div>
+        </div>
+      ) : (
+        ''
+      )}
+      <div className={!isChatHidden ? 'events chat-open' : 'events'}>
+        <Events />
+      </div>
+      <div className='notifications'>
+        <Notification
+          twitchUserName={twitchUserName}
+          show={notification}
+          isOpen={() => setNotification(false)}
+        />
       </div>
     </>
   );
 }
 
-export default Home;
+const LIVE_STREAMS = gql`
+  query LIVE_STREAMS {
+    twitchUserStream {
+      user_name
+      viewer_count
+    }
+  }
+`;
+export default Live;
