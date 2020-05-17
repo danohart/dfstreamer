@@ -39,7 +39,7 @@ function Events(props) {
   if (error)
     return (
       <>
-        <div class="error">
+        <div class='error'>
           <h3>Sorry, there was an error.</h3>
           <p>{error.message}</p>
         </div>
@@ -60,7 +60,7 @@ function Events(props) {
             ? 'Garage'
             : ''
         }
-        className="center-align"
+        className='center-align'
         style={{ gridColumn: `${props.stage}`, gridRow: 'tracks' }}
       >
         {props.stage === 'df_thelivingroom' ? 'Living Room' : ''}
@@ -77,7 +77,7 @@ function Events(props) {
           return (
             <>
               <div
-                className={`event ${props.stage}`}
+                className={`event ${props.stage} past`}
                 key={event.title}
                 style={{
                   gridRow: `time-${cleanStartTime} / time-${cleanEndTime}`,
@@ -85,21 +85,21 @@ function Events(props) {
                 }}
                 key={event.title}
               >
-                <div className="event-title">
+                <div className='event-title'>
                   <h3>{event.title}</h3>
                 </div>
-                <div className="event-time">
-                  <div className="event-time-startTime">
+                <div className='event-time'>
+                  <div className='event-time-startTime'>
                     {tConvert(event.startTime)}
                   </div>
-                  <div className="event-time-endTime">
+                  <div className='event-time-endTime'>
                     {tConvert(event.endTime)}
                   </div>
                 </div>
-                <div className="event-reminder">
+                <div className='event-reminder'>
                   <a
                     href={`http://www.google.com/calendar/event?action=TEMPLATE&dates=20200518T${GMTstartTime}00Z%2F20200518T${GMTendTime}00Z&text=${event.title}%20Reminder!&location=${event.host}&details=Live on distancefest.com`}
-                    target="_blank"
+                    target='_blank'
                   >
                     <FontAwesomeIcon icon={faClock} />
                     Remind me
