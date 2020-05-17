@@ -135,7 +135,7 @@ const events2 = [
     endTime: '18:30',
   },
   {
-    title: '???',
+    title: 'The Regards',
     host: 'df_thegarage',
     date: '05172020',
     startTime: '18:30',
