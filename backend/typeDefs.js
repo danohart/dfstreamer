@@ -28,6 +28,10 @@ const typeDefs = gql`
     endTime: String
   }
 
+  type CurrentUser {
+    streamer: String
+  }
+
   type TwitchUser {
     id: String
     display_name: String
@@ -62,6 +66,7 @@ const typeDefs = gql`
   type Query {
     events: [Event]
     events2: [Event]
+    currentStream: CurrentUser
     twitchUser(twitchUser: String!): [TwitchUser]
     twitchUserVideos(id: ID!): [TwitchUserVideo]
     twitchUserStream(user_id: String): [TwitchUserStream]

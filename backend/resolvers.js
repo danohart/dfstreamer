@@ -3,20 +3,6 @@ require('now-env');
 const bcrypt = require('bcryptjs');
 const jwt = require('jsonwebtoken');
 const twitchClientID = process.env.twitchClientID;
-const MongoClient = require('mongodb').MongoClient;
-
-const dbPassword = process.env.dbPassword;
-const dbUrl = `mongodb+srv://danielhart:${dbPassword}@cluster0-zfdv9.mongodb.net/test?retryWrites=true&w=majority`;
-
-const client = new MongoClient(dbUrl, {
-  useNewUrlParser: true,
-  useUnifiedTopology: true,
-});
-
-client.connect(function (err) {
-  db = client.db('dfstreamer');
-  console.log('😎 mongoDB connected');
-});
 
 const events = [
   {
@@ -193,6 +179,16 @@ const resolvers = {
 
     events2() {
       return events2;
+    },
+
+    currentStream: async () => {
+      values = await db
+        .collection('currentstream')
+        .findOne()
+        .then((res) => {
+          return res;
+        });
+      return values;
     },
 
     async twitchUser(parent, args) {

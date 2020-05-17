@@ -1002,6 +1002,10 @@ form {
   background-color: $secondary-color;
   text-align: center;
 
+  a {
+    color: $white;
+  }
+
   h4 {
     text-transform: uppercase;
     text-shadow: none;

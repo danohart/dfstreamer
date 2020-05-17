@@ -12,7 +12,7 @@ import Notification from '../components/Notification';
 function Live() {
   const ref = useRef('');
   const [isChatHidden, setChatHidden] = useState(true);
-  const [twitchUserName, setTwitchUserName] = useState('df_thegarage');
+  const [twitchUserName, setTwitchUserName] = useState('');
 
   const [isSticky, setSticky] = useState(false);
   const [notification, setNotification] = useState(false);
@@ -45,8 +45,10 @@ function Live() {
     }, 8000);
   }
 
-  const { loading, data } = useQuery(LIVE_STREAMS);
+  const { loading, error, data } = useQuery(CURRENT_STREAM);
+
   if (loading) return <p>Waiting</p>;
+  if (error) return <p>There's been an error {error}</p>;
 
   const switchStream = (e) => {
     setTwitchUserName(e);
@@ -79,7 +81,9 @@ function Live() {
           </h3>
         </div>
         <div className={`sticky-wrapper${isSticky ? ' sticky' : ''}`} ref={ref}>
-          <LiveStream twitchUser={twitchUserName} />
+          <LiveStream
+            twitchUser={twitchUserName || data.currentStream.streamer}
+          />
         </div>
         <h3 className='center-align' data-text='Switch Rooms'>
           Switch Rooms
@@ -169,11 +173,10 @@ function Live() {
   );
 }
 
-const LIVE_STREAMS = gql`
-  query LIVE_STREAMS {
-    twitchUserStream {
-      user_name
-      viewer_count
+const CURRENT_STREAM = gql`
+  query CURRENT_STREAM {
+    currentStream {
+      streamer
     }
   }
 `;
