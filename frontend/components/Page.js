@@ -22,7 +22,10 @@ function Page(props) {
           property='og:description'
           content='Live Streaming Music from Safe Spaces'
         />
-        <meta property='og:image' content='/dfheader.png' />
+        <meta
+          property='og:image'
+          content='https://distancefest.com/dfheader.png'
+        />
       </Head>
       {/* <Header /> */}
       <div className='main'>{props.children}</div>
