@@ -98,7 +98,7 @@ function Events(props) {
                 </div>
                 <div className='event-reminder'>
                   <a
-                    href={`http://www.google.com/calendar/event?action=TEMPLATE&dates=20200518T${GMTstartTime}00Z%2F20200518T${GMTendTime}00Z&text=${event.title}%20Reminder!&location=${event.host}&details=Live on distancefest.com`}
+                    href={`http://www.google.com/calendar/event?action=TEMPLATE&dates=20200517T${GMTstartTime}00Z%2F20200517T${GMTendTime}00Z&text=${event.title}%20Reminder!&location=${event.host}&details=Live on distancefest.com`}
                     target='_blank'
                   >
                     <FontAwesomeIcon icon={faClock} />
