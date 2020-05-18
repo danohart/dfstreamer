@@ -27,7 +27,7 @@ function Home() {
             </h2>
           </div>
           <iframe
-            height='800'
+            height='900'
             title='Embedded Form'
             allowtransparency='true'
             frameBorder='0'
