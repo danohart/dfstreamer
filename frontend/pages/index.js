@@ -1,69 +1,10 @@
-import React, { useState, useEffect, useRef } from 'react';
-import Head from 'next/head';
-import { useQuery } from '@apollo/react-hooks';
-import gql from 'graphql-tag';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faTimes } from '@fortawesome/free-solid-svg-icons';
-import LiveStream from '../components/LiveStream';
-import Stream from '../components/Stream';
-import Events from '../components/Events';
-import Notification from '../components/Notification';
+import React from 'react';
+import ArtistSubmission from '../components/ArtistSubmission';
 
-function Live() {
-  const ref = useRef('');
-  const [isChatHidden, setChatHidden] = useState(true);
-  const [twitchUserName, setTwitchUserName] = useState('df_thegarage');
-
-  const [isSticky, setSticky] = useState(false);
-  const [notification, setNotification] = useState(false);
-
-  const handleScroll = () => {
-    setSticky(ref.current.getBoundingClientRect().top <= 0);
-  };
-
-  useEffect(() => {
-    window.addEventListener('scroll', handleScroll);
-
-    return () => {
-      window.removeEventListener('scroll', () => handleScroll);
-    };
-  }, []);
-
-  function chatPopup() {
-    isChatHidden === false ? setChatHidden(true) : setChatHidden(false);
-    if (isChatHidden === true)
-      window.scrollTo({
-        top: 450,
-        behavior: 'smooth',
-      });
-  }
-
-  function Notifications() {
-    setNotification(true);
-    setTimeout(function () {
-      setNotification(false);
-    }, 8000);
-  }
-
-  const { loading, data } = useQuery(LIVE_STREAMS);
-  if (loading) return <p>Waiting</p>;
-
-  const switchStream = (e) => {
-    setTwitchUserName(e);
-    Notifications();
-    window.scrollTo({
-      top: 300,
-      left: 100,
-      behavior: 'smooth',
-    });
-  };
-
+function Home() {
   return (
     <>
-      <Head>
-        <title>Live - Distance Fest</title>
-      </Head>
-      <div className={!isChatHidden ? 'home chat-open' : 'home'}>
+      <div className='home'>
         <div className='header'>
           <div className='welcome center-align'>
             {/* <a href="/">
@@ -77,104 +18,57 @@ function Live() {
           <h3 className='center-align' data-text='May 16-17'>
             May 16-17
           </h3>
+          <h2 className='center-align'>
+            Thanks for another great weekend! <br />
+            We'll see you next time!
+          </h2>
         </div>
-        <div className={`sticky-wrapper${isSticky ? ' sticky' : ''}`} ref={ref}>
-          <LiveStream twitchUser={twitchUserName} />
-        </div>
-        <h3 className='center-align' data-text='Switch Rooms'>
-          Switch Rooms
-        </h3>
-        <div className='stream-thumbs'>
-          {twitchUserName === 'df_thelivingroom' ? (
-            <div className='stream-wrapper'>
-              <h4 className='title center-align'>Living Room</h4>
-              <div className='stream fullscreened'>
-                <div className='video'>Fullscreened</div>
-              </div>
-            </div>
-          ) : (
-            <Stream
-              twitchUser='df_thelivingroom'
-              switchStream={() => switchStream('df_thelivingroom')}
-            />
-          )}
-
-          {twitchUserName === 'df_thebedroom' ? (
-            <div className='stream-wrapper'>
-              <h4 className='title center-align'>Bedroom</h4>
-              <div className='stream fullscreened'>
-                <div className='video'>Fullscreened</div>
-              </div>
-            </div>
-          ) : (
-            <Stream
-              twitchUser='df_thebedroom'
-              switchStream={() => switchStream('df_thebedroom')}
-            />
-          )}
-          {twitchUserName === 'df_thegarage' ? (
-            <div className='stream-wrapper'>
-              <h4 className='title center-align'>Garage</h4>
-              <div className='stream fullscreened'>
-                <div className='video'>Fullscreened</div>
-              </div>
-            </div>
-          ) : (
-            <Stream
-              twitchUser='df_thegarage'
-              switchStream={() => switchStream('df_thegarage')}
-            />
-          )}
-        </div>
-      </div>
-
-      {isChatHidden ? (
-        <div className='chat-tab' onClick={() => chatPopup()}>
-          Chat
-        </div>
-      ) : (
-        ''
-      )}
-
-      {!isChatHidden ? (
-        <div className='chat-container expanded'>
-          <div className='close-chat' onClick={() => chatPopup()}>
-            <FontAwesomeIcon icon={faTimes} /> Close Chat
+        <div className='submission'>
+          <div className='submission-title'>
+            <h2 className='center-align' data-text='Artist Submissions'>
+              Artist Submissions
+            </h2>
+            <p>
+              If you are inteterested in showcasing your performance in the next
+              Distance Fest, please fill out the form below.
+            </p>
           </div>
-          <div className='chat'>
-            <iframe
-              src={`https://www.twitch.tv/embed/${twitchUserName}/chat?parent=distancefest.com`}
-              height='900'
-              width='400'
-              frameBorder='0'
-              scrolling='yes'
-              id='chat_embed'
-            ></iframe>
-          </div>
+          <ArtistSubmission />
+          {/* <div className="submission-form">
+            <form onSubmit={handleSubmit}>
+              <label>
+                Artist Name
+                <input type="text" placeholder="Artist Name" />
+              </label>
+              <label>
+                Contact Name
+                <input type="text" placeholder="Contact Name" />
+              </label>
+              <label>
+                Email
+                <input type="text" placeholder="Email" />
+              </label>
+              <label>
+                Genre
+                <input type="text" placeholder="Genre" />
+              </label>
+              <label>Bio</label>
+              <textarea placeholder="Bio" />
+              <label>
+                Website
+                <input type="text" placeholder="Website" />
+              </label>
+              <label>
+                City
+                <input type="text" placeholder="City" />
+              </label>
+              <input type="submit" value="Submit" />
+            </form>
+          </div> */}
         </div>
-      ) : (
-        ''
-      )}
-      <div className={!isChatHidden ? 'events chat-open' : 'events'}>
-        <Events />
-      </div>
-      <div className='notifications'>
-        <Notification
-          twitchUserName={twitchUserName}
-          show={notification}
-          isOpen={() => setNotification(false)}
-        />
       </div>
     </>
   );
 }
 
-const LIVE_STREAMS = gql`
-  query LIVE_STREAMS {
-    twitchUserStream {
-      user_name
-      viewer_count
-    }
-  }
-`;
-export default Live;
+export default Home;

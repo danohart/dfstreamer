@@ -12,7 +12,7 @@ import Notification from '../components/Notification';
 function Live() {
   const ref = useRef('');
   const [isChatHidden, setChatHidden] = useState(true);
-  const [twitchUserName, setTwitchUserName] = useState('df_thelivingroom');
+  const [twitchUserName, setTwitchUserName] = useState('df_thegarage');
 
   const [isSticky, setSticky] = useState(false);
   const [notification, setNotification] = useState(false);
@@ -28,6 +28,15 @@ function Live() {
       window.removeEventListener('scroll', () => handleScroll);
     };
   }, []);
+
+  function chatPopup() {
+    isChatHidden === false ? setChatHidden(true) : setChatHidden(false);
+    if (isChatHidden === true)
+      window.scrollTo({
+        top: 450,
+        behavior: 'smooth',
+      });
+  }
 
   function Notifications() {
     setNotification(true);
@@ -76,23 +85,51 @@ function Live() {
           Switch Rooms
         </h3>
         <div className='stream-thumbs'>
-          <Stream
-            twitchUser='df_thelivingroom'
-            switchStream={() => switchStream('df_thelivingroom')}
-          />
-          <Stream
-            twitchUser='df_thebedroom'
-            switchStream={() => switchStream('df_thebedroom')}
-          />
-          <Stream
-            twitchUser='df_thegarage'
-            switchStream={() => switchStream('df_thegarage')}
-          />
+          {twitchUserName === 'df_thelivingroom' ? (
+            <div className='stream-wrapper'>
+              <h4 className='title center-align'>Living Room</h4>
+              <div className='stream fullscreened'>
+                <div className='video'>Fullscreened</div>
+              </div>
+            </div>
+          ) : (
+            <Stream
+              twitchUser='df_thelivingroom'
+              switchStream={() => switchStream('df_thelivingroom')}
+            />
+          )}
+
+          {twitchUserName === 'df_thebedroom' ? (
+            <div className='stream-wrapper'>
+              <h4 className='title center-align'>Bedroom</h4>
+              <div className='stream fullscreened'>
+                <div className='video'>Fullscreened</div>
+              </div>
+            </div>
+          ) : (
+            <Stream
+              twitchUser='df_thebedroom'
+              switchStream={() => switchStream('df_thebedroom')}
+            />
+          )}
+          {twitchUserName === 'df_thegarage' ? (
+            <div className='stream-wrapper'>
+              <h4 className='title center-align'>Garage</h4>
+              <div className='stream fullscreened'>
+                <div className='video'>Fullscreened</div>
+              </div>
+            </div>
+          ) : (
+            <Stream
+              twitchUser='df_thegarage'
+              switchStream={() => switchStream('df_thegarage')}
+            />
+          )}
         </div>
       </div>
 
       {isChatHidden ? (
-        <div className='chat-tab' onClick={() => setChatHidden(false)}>
+        <div className='chat-tab' onClick={() => chatPopup()}>
           Chat
         </div>
       ) : (
@@ -101,7 +138,7 @@ function Live() {
 
       {!isChatHidden ? (
         <div className='chat-container expanded'>
-          <div className='close-chat' onClick={() => setChatHidden(true)}>
+          <div className='close-chat' onClick={() => chatPopup()}>
             <FontAwesomeIcon icon={faTimes} /> Close Chat
           </div>
           <div className='chat'>
