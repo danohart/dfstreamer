@@ -77,7 +77,12 @@ function Events(props) {
           return (
             <>
               <div
-                className={`event ${props.stage}`}
+                className={`event ${props.stage} ${
+                  new Date().getHours() + ':' + new Date().getMinutes() >
+                  event.startTime
+                    ? 'past'
+                    : ''
+                }`}
                 key={event.title}
                 style={{
                   gridRow: `time-${cleanStartTime} / time-${cleanEndTime}`,
