@@ -783,6 +783,22 @@ form {
       background-color: $secondary-color-bold;
     }
 
+    &.past {
+      opacity: 0.4;
+      position: relative;
+
+      &:before {
+        position: absolute;
+        content: '';
+        background-color: $secondary-color;
+        padding: 2px;
+        width: 100%;
+        top: 53px;
+        left: 0;
+        transform: rotate(20deg);
+      }
+    }
+
     &-title {
       h3 {
         margin: 0;

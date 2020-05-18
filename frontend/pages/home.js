@@ -1,5 +1,6 @@
 import React from 'react';
 import Countdown from '../components/Countdown';
+import ArtistSubmission from '../components/ArtistSubmission';
 
 function Home() {
   return (
@@ -18,23 +19,22 @@ function Home() {
           <h3 className='center-align' data-text='May 16-17'>
             May 16-17
           </h3>
+          <h2 className='center-align'>
+            Thanks for another great weekend! <br />
+            We'll see you next time!
+          </h2>
         </div>
-        <Countdown />
         <div className='submission'>
           <div className='submission-title'>
             <h2 className='center-align' data-text='Artist Submissions'>
               Artist Submissions
             </h2>
+            <p>
+              If you are inteterested in showcasing your performance in the next
+              Distance Fest, please fill out the form below.
+            </p>
           </div>
-          <iframe
-            height='800'
-            title='Embedded Form'
-            allowtransparency='true'
-            frameBorder='0'
-            scrolling='no'
-            style={{ width: '100%', border: 'none', color: 'white' }}
-            src='https://danohart.wufoo.com/embed/qxlil4n1bcmypk/'
-          ></iframe>
+          <ArtistSubmission />
           {/* <div className="submission-form">
             <form onSubmit={handleSubmit}>
               <label>
@@ -67,10 +67,6 @@ function Home() {
             </form>
           </div> */}
         </div>
-      </div>
-      <div className='schedule'>
-        <img src='../static/Schedule.png' />
-        <h3 data-text='Coming Soon!'>Coming Soon!</h3>
       </div>
     </>
   );

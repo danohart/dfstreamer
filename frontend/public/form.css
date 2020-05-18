@@ -1,0 +1,28 @@
+.wufoo header.info {
+  display: none;
+}
+
+.wufoo input[type='text'],
+.wufoo input[type='email'],
+.wufoo input[type='url'] {
+  border: 0;
+  padding: 10px 0px 10px 10px;
+  font-size: 21px !important;
+}
+
+.wufoo .submit,
+.safari .wufoo input.file {
+  -webkit-appearance: none;
+  display: inline-block;
+  text-transform: uppercase;
+  font-size: 14px;
+  font-weight: bold;
+  text-align: center;
+  color: #ffffff;
+  background: #ff296d;
+  padding: 12px 20px;
+  border: 2px solid transparent;
+  border-radius: 5px;
+  margin-top: 5px;
+  cursor: pointer;
+}
