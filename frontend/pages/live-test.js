@@ -1,5 +1,7 @@
 import React, { useState, useEffect, useRef } from 'react';
 import Head from 'next/head';
+import { useQuery } from '@apollo/react-hooks';
+import gql from 'graphql-tag';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faTimes } from '@fortawesome/free-solid-svg-icons';
 import LiveStream from '../components/LiveStream';
@@ -10,7 +12,7 @@ import Notification from '../components/Notification';
 function Live() {
   const ref = useRef('');
   const [isChatHidden, setChatHidden] = useState(true);
-  const [twitchUserName, setTwitchUserName] = useState('df_thelivingroom');
+  const [twitchUserName, setTwitchUserName] = useState('');
 
   const [isSticky, setSticky] = useState(false);
   const [notification, setNotification] = useState(false);
@@ -43,6 +45,14 @@ function Live() {
     }, 8000);
   }
 
+  const { loading, data, error } = useQuery(CURRENT_STREAMER);
+
+  if (loading) return <p>Waiting</p>;
+
+  if (error) return <p>{error}</p>;
+
+  console.log('data', data);
+
   const switchStream = (e) => {
     setTwitchUserName(e);
     Notifications();
@@ -74,12 +84,20 @@ function Live() {
           </h3>
         </div>
         <div className={`sticky-wrapper${isSticky ? ' sticky' : ''}`} ref={ref}>
-          <LiveStream twitchUser={twitchUserName} />
+          <LiveStream
+            twitchUser={
+              twitchUserName
+                ? twitchUserName
+                : !data
+                ? 'df_thelivingroom'
+                : data.currentStream.streamer
+            }
+          />
         </div>
         <h3 className='center-align' data-text='Switch Rooms'>
           Switch Rooms
         </h3>
-        <div className='stream-thumbs'>
+        {/* <div className='stream-thumbs'>
           {twitchUserName === 'df_thelivingroom' ? (
             <div className='stream-wrapper'>
               <h4 className='title center-align'>Living Room</h4>
@@ -120,7 +138,7 @@ function Live() {
               switchStream={() => switchStream('df_thegarage')}
             />
           )}
-        </div>
+        </div> */}
       </div>
 
       {isChatHidden ? (
@@ -152,6 +170,9 @@ function Live() {
       ) : (
         ''
       )}
+      <div className={!isChatHidden ? 'events chat-open' : 'events'}>
+        <Events />
+      </div>
       <div className='notifications'>
         <Notification
           twitchUserName={twitchUserName}
@@ -163,4 +184,11 @@ function Live() {
   );
 }
 
+const CURRENT_STREAMER = gql`
+  query CURRENT_STREAMER {
+    currentStream {
+      streamer
+    }
+  }
+`;
 export default Live;

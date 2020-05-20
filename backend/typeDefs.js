@@ -81,6 +81,8 @@ const typeDefs = gql`
       endTime: String
     ): Event!
 
+    switchStream(streamer: String!): CurrentUser!
+
     signup(
       email: String!
       password: String!

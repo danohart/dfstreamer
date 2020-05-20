@@ -4,8 +4,6 @@ import gql from 'graphql-tag';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faClock } from '@fortawesome/free-solid-svg-icons';
 
-import { withData } from '../lib/withData';
-
 export const ALL_EVENTS = gql`
   query ALL_EVENTS {
     events2 {
@@ -113,4 +111,4 @@ function Events(props) {
   );
 }
 
-export default withData()(Events);
+export default Events;

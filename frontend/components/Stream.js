@@ -1,8 +1,6 @@
 import { useQuery } from '@apollo/react-hooks';
 import gql from 'graphql-tag';
 
-import { withData } from '../lib/withData';
-
 export const USER_INFO = gql`
   query USER_INFO($twitchUser: String!, $user_id: String!) {
     twitchUser(twitchUser: $twitchUser) {
@@ -22,13 +20,13 @@ function Stream(props) {
     variables: { twitchUser: props.twitchUser, user_id: props.twitchUser },
   });
   if (loading) return <p>Loading ...</p>;
-  if (error)
-    return (
-      <>
-        <h3>Sorry, there was an error.</h3>
-        <p>{error.message}</p>
-      </>
-    );
+  // if (error)
+  //   return (
+  //     <>
+  //       <h3>Sorry, there was an error.</h3>
+  //       <p>{error.message}</p>
+  //     </>
+  //   );
   const video = props.twitchUser;
 
   return (
@@ -62,4 +60,4 @@ function Stream(props) {
   );
 }
 
-export default withData()(Stream);
+export default Stream;

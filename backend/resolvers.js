@@ -4,191 +4,14 @@ const bcrypt = require('bcryptjs');
 const jwt = require('jsonwebtoken');
 const twitchClientID = process.env.twitchClientID;
 
-const events = [
-  {
-    title: 'Mark Rose',
-    host: 'df_thebedroom',
-    date: '05162020',
-    startTime: '17:00',
-    endTime: '17:30',
-  },
-  {
-    title: 'Sam Hinrichsen',
-    host: 'df_thegarage',
-    date: '05162020',
-    startTime: '17:30',
-    endTime: '18:00',
-  },
-  {
-    title: 'Norman Lake',
-    host: 'df_thelivingroom',
-    date: '05162020',
-    startTime: '18:00',
-    endTime: '18:30',
-  },
-  {
-    title: 'Grey Slush',
-    host: 'df_thebedroom',
-    date: '05162020',
-    startTime: '18:30',
-    endTime: '19:00',
-  },
-  {
-    title: 'Austin Fillmore',
-    host: 'df_thelivingroom',
-    date: '05162020',
-    startTime: '19:00',
-    endTime: '19:45',
-  },
-  {
-    title: 'HEAVENWORLD (DJ Set A)',
-    host: 'df_thebedroom',
-    date: '05162020',
-    startTime: '19:45',
-    endTime: '20:30',
-  },
-  {
-    title: 'B Löwd',
-    host: 'df_thegarage',
-    date: '05162020',
-    startTime: '20:30',
-    endTime: '21:15',
-  },
-  {
-    title: 'darkhurst',
-    host: 'df_thegarage',
-    date: '05162020',
-    startTime: '21:15',
-    endTime: '22:00',
-  },
-  {
-    title: 'Bodyman',
-    host: 'df_thebedroom',
-    date: '05162020',
-    startTime: '22:00',
-    endTime: '23:00',
-  },
-  {
-    title: 'Vertical Axium',
-    host: 'df_thegarage',
-    date: '05162020',
-    startTime: '23:00',
-    endTime: '00:00',
-  },
-];
-
-const events2 = [
-  {
-    title: 'DYSTOPIA KID',
-    host: 'df_thegarage',
-    date: '05172020',
-    startTime: '15:30',
-    endTime: '16:00',
-  },
-  {
-    title: 'Spencer Lantz',
-    host: 'df_thelivingroom',
-    date: '05172020',
-    startTime: '16:00',
-    endTime: '16:30',
-  },
-  {
-    title: 'Mel Senese',
-    host: 'df_thebedroom',
-    date: '05172020',
-    startTime: '16:30',
-    endTime: '17:00',
-  },
-  {
-    title: 'The Evening Attraction',
-    host: 'df_thegarage',
-    date: '05172020',
-    startTime: '17:00',
-    endTime: '17:30',
-  },
-  {
-    title: 'Rain Garden ',
-    host: 'df_thelivingroom',
-    date: '05172020',
-    startTime: '17:30',
-    endTime: '18:00',
-  },
-  {
-    title: 'Tyronic',
-    host: 'df_thebedroom',
-    date: '05172020',
-    startTime: '18:00',
-    endTime: '18:30',
-  },
-  {
-    title: 'The Regards',
-    host: 'df_thegarage',
-    date: '05172020',
-    startTime: '18:30',
-    endTime: '19:00',
-  },
-  {
-    title: 'Terribly Happy',
-    host: 'df_thelivingroom',
-    date: '05172020',
-    startTime: '19:00',
-    endTime: '19:45',
-  },
-  {
-    title: 'Bluprint',
-    host: 'df_thebedroom',
-    date: '05172020',
-    startTime: '19:45',
-    endTime: '20:30',
-  },
-  {
-    title: 'The Royalists',
-    host: 'df_thegarage',
-    date: '05172020',
-    startTime: '20:30',
-    endTime: '21:15',
-  },
-  {
-    title: 'HEAVENWORLD (DJ SET B)',
-    host: 'df_thelivingroom',
-    date: '05172020',
-    startTime: '21:15',
-    endTime: '22:00',
-  },
-  {
-    title: 'NUMA',
-    host: 'df_thebedroom',
-    date: '05172020',
-    startTime: '22:00',
-    endTime: '23:00',
-  },
-  {
-    title: 'Collin Reeve',
-    host: 'df_thegarage',
-    date: '05172020',
-    startTime: '23:00',
-    endTime: '00:00',
-  },
-];
-
 const resolvers = {
   Query: {
-    events() {
-      return events;
+    events: async (root, data, { mongo: { dfstreamer } }) => {
+      return await dfstreamer.collection('schedule').find().toArray();
     },
 
-    events2() {
-      return events2;
-    },
-
-    currentStream: async () => {
-      values = await db
-        .collection('currentstream')
-        .findOne()
-        .then((res) => {
-          return res;
-        });
-      return values;
+    currentStream: async (root, data, { mongo: { dfstreamer } }) => {
+      return await dfstreamer.collection('currentstream').findOne();
     },
 
     async twitchUser(parent, args) {
@@ -198,7 +21,6 @@ const resolvers = {
         {
           method: 'GET',
           headers: {
-            'Content-Type': 'application/json',
             'Client-ID': `${twitchClientID}`,
           },
         }
@@ -214,7 +36,6 @@ const resolvers = {
         {
           method: 'GET',
           headers: {
-            'Content-Type': 'application/json',
             'Client-ID': `${twitchClientID}`,
           },
         }
@@ -232,7 +53,6 @@ const resolvers = {
         {
           method: 'GET',
           headers: {
-            'Content-Type': 'application/json',
             'Client-ID': `${twitchClientID}`,
           },
         }
@@ -249,6 +69,12 @@ const resolvers = {
       return args;
     },
 
+    switchStream: async (root, data, { mongo: { dfstreamer } }) => {
+      const response = await dfstreamer
+        .collection('currentstream')
+        .update({ $set: { streamer: data } }); // 3
+      return console.log('i did it'); // 4
+    },
     async signup(parent, args, res, info) {
       args.email = args.email.toLowerCase();
       const password = await bcrypt.hash(args.password, 10);

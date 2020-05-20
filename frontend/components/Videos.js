@@ -1,7 +1,5 @@
-import { useQuery } from "@apollo/react-hooks";
-import gql from "graphql-tag";
-
-import { withData } from "../lib/withData";
+import { useQuery } from '@apollo/react-hooks';
+import gql from 'graphql-tag';
 
 export const ALL_USER_VIDEOS_QUERY = gql`
   query ALL_USER_VIDEOS_QUERY($user_id: ID!) {
@@ -29,20 +27,20 @@ function Videos(props) {
     );
   return (
     <>
-      <h1 className="center-align">
-        {data.twitchUserVideos[0].user_name.split("_")[1]} Videos
+      <h1 className='center-align'>
+        {data.twitchUserVideos[0].user_name.split('_')[1]} Videos
       </h1>
-      <div className="video-container">
+      <div className='video-container'>
         {data.twitchUserVideos.map((video) => (
-          <div className="video-wrapper" key={video.id}>
-            <div className="video">
+          <div className='video-wrapper' key={video.id}>
+            <div className='video'>
               <iframe
                 src={`https://player.twitch.tv/?video=${video.id}&parent=distancefest.com&branding=false&autoplay=false`}
-                height="300"
-                width="900"
-                frameBorder="0"
-                scrolling="no"
-                allowFullScreen="yes"
+                height='300'
+                width='900'
+                frameBorder='0'
+                scrolling='no'
+                allowFullScreen='yes'
               ></iframe>
             </div>
           </div>
@@ -52,4 +50,4 @@ function Videos(props) {
   );
 }
 
-export default withData()(Videos);
+export default Videos;

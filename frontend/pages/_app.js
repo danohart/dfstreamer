@@ -1,5 +1,5 @@
-import { withData } from '../lib/withData';
 import { ApolloProvider } from '@apollo/react-hooks';
+import withData from '../apolloClient';
 import Page from '../components/Page';
 import '../styles/style.scss';
 
@@ -11,9 +11,5 @@ const App = ({ Component, pageProps, apollo }) => (
   </ApolloProvider>
 );
 
-export default withData(({ initialState }) => {
-  return new ApolloClient({
-    uri: 'http://localhost:4444',
-    cache: new InMemoryCache().restore(initialState || {}),
-  });
-})(App);
+// Wraps all components in the tree with the data provider
+export default withData(App);
