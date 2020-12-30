@@ -17,6 +17,9 @@ export default withApollo(
   ({ initialState }) =>
     new ApolloClient({
       link: link,
+      fetchOptions: {
+        mode: 'no-cors',
+      },
       cache: new InMemoryCache()
         //  rehydrate the cache using the initial data passed from the server:
         .restore(initialState || {}),
