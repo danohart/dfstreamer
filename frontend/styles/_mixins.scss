@@ -67,6 +67,10 @@ a.button {
   @include button;
 }
 
+@mixin fest-gradient {
+  background: linear-gradient(0deg, $secondary-color 0%, $secondary-color-bold 35%, $fest-blue 63%, $fest-blue-alt 100%);
+}
+
 /** 
  * Returns the number of keyframes required based on $n (max 50)
  * $n: length of colors list

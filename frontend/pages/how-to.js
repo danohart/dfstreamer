@@ -13,8 +13,8 @@ export default function HowTo() {
           </h1>
         </div>
         <h2>Live Music from Safe Spaces</h2>
-        <h3 className='center-align' data-text='May 16-17'>
-          May 16-17
+        <h3 className='center-align' data-text="New Year's Eve">
+          New Year's Eve
         </h3>
       </div>
       <Head>
