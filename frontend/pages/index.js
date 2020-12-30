@@ -15,15 +15,12 @@ function Home() {
             </h1>
           </div>
           <h2>Live Music from Safe Spaces</h2>
-          <h3 className='center-align' data-text='May 16-17'>
-            May 16-17
+          <h3 className='center-align' data-text="New Year's Eve">
+            New Year's Eve
           </h3>
-          <h2 className='center-align'>
-            Thanks for another great weekend! <br />
-            We'll see you next time!
-          </h2>
+          <h2 className='center-align'>We're Back!</h2>
         </div>
-        <div className='submission'>
+        {/* <div className='submission'>
           <div className='submission-title'>
             <h2 className='center-align' data-text='Artist Submissions'>
               Artist Submissions
@@ -33,8 +30,8 @@ function Home() {
               Distance Fest, please fill out the form below.
             </p>
           </div>
-          <ArtistSubmission />
-          {/* <div className="submission-form">
+          <ArtistSubmission /> 
+          <div className="submission-form">
             <form onSubmit={handleSubmit}>
               <label>
                 Artist Name
@@ -64,8 +61,8 @@ function Home() {
               </label>
               <input type="submit" value="Submit" />
             </form>
-          </div> */}
-        </div>
+          </div> 
+      </div>*/}
       </div>
     </>
   );
