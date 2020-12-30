@@ -14,12 +14,12 @@ function Events() {
         <EventHost stage='df_thebedroom' />
         <EventHost stage='df_thegarage' />
       </div>
-      <h2 className='center-align'>Day 2</h2>
+      {/* <h2 className='center-align'>Day 2</h2>
       <div className='events-container2'>
         <EventHost2 stage='df_thelivingroom' />
         <EventHost2 stage='df_thebedroom' />
         <EventHost2 stage='df_thegarage' />
-      </div>
+      </div> */}
     </>
   );
 }

@@ -77,7 +77,7 @@ function Events(props) {
           return (
             <>
               <div
-                className={`event ${props.stage} past`}
+                className={`event ${props.stage}`}
                 key={event.title}
                 style={{
                   gridRow: `time-${cleanStartTime} / time-${cleanEndTime}`,

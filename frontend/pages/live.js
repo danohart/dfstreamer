@@ -12,7 +12,7 @@ import Notification from '../components/Notification';
 function Live() {
   const ref = useRef('');
   const [isChatHidden, setChatHidden] = useState(true);
-  const [twitchUserName, setTwitchUserName] = useState('df_thegarage');
+  const [twitchUserName, setTwitchUserName] = useState('df_thelivingroom');
 
   const [isSticky, setSticky] = useState(false);
   const [notification, setNotification] = useState(false);
