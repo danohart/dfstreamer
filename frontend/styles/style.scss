@@ -17,11 +17,6 @@ body {
   font-size: 16px;
   padding: 0px;
   margin: 0px;
-
-  @include mobile {
-    background-size: 1000%;
-    background-position: bottom center;
-  }
 }
 
 a,
@@ -1022,8 +1017,14 @@ form {
   h4 {
     text-transform: uppercase;
     text-shadow: none;
-  }
 
+    a, a:link {
+      color: $fest-blue-alt;
+    }
+  
+  }
+  
+ 
   &-links {
     display: flex;
     flex-direction: row;

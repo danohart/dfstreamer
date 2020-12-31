@@ -8,7 +8,6 @@ function Events() {
       <div className='center-align'>All times in Central Time zone</div>
       <br />
       <br />
-      <h2 className='center-align'>Day 1</h2>
       <div className='events-container'>
         <EventHost stage='df_thelivingroom' />
         <EventHost stage='df_thebedroom' />

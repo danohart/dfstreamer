@@ -14,6 +14,7 @@ function Live() {
   const ref = useRef('');
   const [isChatHidden, setChatHidden] = useState(true);
   const [twitchUserName, setTwitchUserName] = useState('df_thelivingroom');
+  const [fundAmount, setFundAmount] = useState('20');
 
   const [isSticky, setSticky] = useState(false);
   const [notification, setNotification] = useState(false);
@@ -24,11 +25,28 @@ function Live() {
 
   useEffect(() => {
     window.addEventListener('scroll', handleScroll);
+    getSheetData();
 
     return () => {
       window.removeEventListener('scroll', () => handleScroll);
     };
   }, []);
+
+  async function getSheetData() {
+    const fetchData = await fetch('https://api.sheetson.com/v2/sheets/DFData', {
+      headers: {
+        'Content-Type': 'application/json',
+        Authorization: `Bearer HUH6MgEQHEYCXAl6mxcFzbJuiY6Fuw6JYNDmNdU7DCkf2q6U9jdCLdux3Pg`,
+        'X-Spreadsheet-Id': '1QlhQOT_sZqiKiPeizDO8FvE-57gCwaVXjyZ4I0W5Cg8',
+      },
+    });
+    const sheetData = await fetchData.json();
+    console.log(sheetData);
+
+    setTwitchUserName(sheetData.results[0].room);
+    setFundAmount(sheetData.results[0].amount);
+    return sheetData;
+  }
 
   function chatPopup() {
     isChatHidden === false ? setChatHidden(true) : setChatHidden(false);
@@ -154,7 +172,7 @@ function Live() {
         ''
       )}
 
-      <Fundraiser />
+      <Fundraiser amount={fundAmount} />
       <div className={!isChatHidden ? 'events chat-open' : 'events'}>
         <Events />
       </div>

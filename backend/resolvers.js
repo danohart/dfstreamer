@@ -20,7 +20,7 @@ client.connect(function (err) {
 
 const events = [
   {
-    title: 'Rain Garden',
+    title: 'Grey Slush',
     host: 'df_thelivingroom',
     date: '12312020',
     startTime: '17:30',
@@ -41,7 +41,7 @@ const events = [
     endTime: '19:00',
   },
   {
-    title: 'Grey Slush',
+    title: 'Tyronic',
     host: 'df_thelivingroom',
     date: '12312020',
     startTime: '19:00',
@@ -95,13 +95,6 @@ const events = [
     date: '12312020',
     startTime: '23:30',
     endTime: '01:00',
-  },
-  {
-    title: 'Jetski',
-    host: 'df_thegarage',
-    date: '12312020',
-    startTime: '01:00',
-    endTime: '02:00',
   },
 ];
 

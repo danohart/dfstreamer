@@ -1,4 +1,4 @@
-export default function Fundraiser() {
+export default function Fundraiser(props) {
   return (
     <div className='fundraiser'>
       <div className='fundraiser-inner'>
@@ -28,7 +28,7 @@ export default function Fundraiser() {
         <div className='fundraiser-goal'>
           <h3>Let's Raise $500 for PMA!</h3>
           <h2>
-            <strong>$20</strong> of <strong>$500</strong> raised
+            <strong>${props.amount}</strong> of <strong>$500</strong> raised
           </h2>
         </div>
       </div>
