@@ -71,6 +71,10 @@ a.button {
   background: linear-gradient(0deg, $secondary-color 0%, $secondary-color-bold 35%, $fest-blue 63%, $fest-blue-alt 100%);
 }
 
+@mixin heading-shadow {
+  text-shadow: 0.2px 0px #e6e6e6, 4px 0px $black;
+}
+
 /** 
  * Returns the number of keyframes required based on $n (max 50)
  * $n: length of colors list

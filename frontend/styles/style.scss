@@ -10,12 +10,13 @@
 body {
   font-family: $primary-font;
   background-color: $black;
-  color: $primary-color;
+  background: url('/bg.png') no-repeat center center;
+  background-attachment: fixed;
+  background-size: cover;
+  color: $black;
   font-size: 16px;
   padding: 0px;
   margin: 0px;
-  background-color: $black;
-  background-size: 60%;
 
   @include mobile {
     background-size: 1000%;
@@ -44,7 +45,7 @@ h5 {
   padding: 0px;
   line-height: 0.95em;
   font-weight: 800;
-  color: $primary-color;
+  color: $black;
 }
 
 h1 {
@@ -115,7 +116,6 @@ h3 {
     display: flex;
     flex-direction: column;
     align-items: center;
-    @include fest-gradient;
 
     img {
       width: 100%;
@@ -128,12 +128,11 @@ h3 {
 
     h1 {
       z-index: 10;
-      background-color: $black;
       padding: 10px;
       margin: 5px;
 
       a {
-        color: $primary-color;
+        color: $black;
       }
     }
   }
@@ -645,9 +644,11 @@ form {
   .event {
     display: flex;
     flex-direction: column;
+    background-color: $black;
     border: 2px solid $secondary-color-bold;
     padding: 20px;
     margin: 2px;
+    color: $white;
     @include ease-transition;
 
     &:hover {
@@ -675,6 +676,7 @@ form {
       h3 {
         margin: 0;
         text-shadow: none;
+        color: $white;
       }
     }
 
@@ -1048,5 +1050,51 @@ form {
 
   &-copyright {
     font-weight: 300;
+  }
+}
+
+.fundraiser {
+  width: 80%;
+  background-color: $black;
+  color: $white;
+  padding: 5px;
+  margin: 20px auto;
+  text-align: center;
+  @include fest-gradient;
+
+  &-inner{
+    background-color: $black;
+    padding: 20px;
+  }
+
+  &-title {
+    color: $white;
+    margin: 0px;
+    margin-bottom: 10px;
+  }
+
+  h2,h3 {
+    color: $white;
+  }
+
+  &-give {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    @include mobile {
+      flex-direction: column;
+    }
+    
+    div {
+      width: 30%;
+      @include mobile {
+       width: 100%;
+       margin-bottom: 10px;
+      }
+    }
+  }
+
+  &-goal {
+    margin-top: 30px;
   }
 }

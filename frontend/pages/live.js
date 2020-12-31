@@ -8,6 +8,7 @@ import LiveStream from '../components/LiveStream';
 import Stream from '../components/Stream';
 import Events from '../components/Events';
 import Notification from '../components/Notification';
+import Fundraiser from '../components/Fundraiser';
 
 function Live() {
   const ref = useRef('');
@@ -66,9 +67,6 @@ function Live() {
       <div className={!isChatHidden ? 'home chat-open' : 'home'}>
         <div className='header'>
           <div className='welcome center-align'>
-            {/* <a href="/">
-          <img src="../static/Welcome.png" />
-        </a> */}
             <h1 data-text='Welcome To Distance Fest'>
               <a href='/'>Welcome To Distance Fest</a>
             </h1>
@@ -155,6 +153,8 @@ function Live() {
       ) : (
         ''
       )}
+
+      <Fundraiser />
       <div className={!isChatHidden ? 'events chat-open' : 'events'}>
         <Events />
       </div>

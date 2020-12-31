@@ -34,7 +34,7 @@ const events = [
     endTime: '18:30',
   },
   {
-    title: 'Terribly Happy',
+    title: 'Rain Garden',
     host: 'df_thegarage',
     date: '12312020',
     startTime: '18:30',
@@ -48,7 +48,7 @@ const events = [
     endTime: '19:30',
   },
   {
-    title: 'Tyronic',
+    title: 'Terribly Happy',
     host: 'df_thebedroom',
     date: '12312020',
     startTime: '19:30',
@@ -76,7 +76,7 @@ const events = [
     endTime: '21:45',
   },
   {
-    title: 'Vertical Axiom',
+    title: 'Vertical Axium',
     host: 'df_thegarage',
     date: '12312020',
     startTime: '21:45',
@@ -95,6 +95,13 @@ const events = [
     date: '12312020',
     startTime: '23:30',
     endTime: '01:00',
+  },
+  {
+    title: 'Jetski',
+    host: 'df_thegarage',
+    date: '12312020',
+    startTime: '01:00',
+    endTime: '02:00',
   },
 ];
 
