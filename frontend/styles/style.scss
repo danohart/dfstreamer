@@ -384,6 +384,15 @@ h3 {
   }
 }
 
+.stream-grid {
+  display: flex;
+  flex-wrap: wrap;
+
+  .stream-wrapper {
+    width: 50%;
+  }
+}
+
 .stream-thumbs {
   width: 83.8%;
   display: flex;
