@@ -49,7 +49,7 @@ function StreamTeam() {
   return (
     <>
       <Head>
-        <title>Live - Distance Fest</title>
+        <title>Stream Team - Distance Fest</title>
       </Head>
       <div className={!isChatHidden ? 'home chat-open' : 'home'}>
         <div className='header'>
@@ -71,6 +71,9 @@ function StreamTeam() {
           ) : (
             <Stream
               twitchUser='timthetatman'
+              className='grid-1'
+              isMutable
+              isNotFullscreen
               switchStream={() => switchStream('timthetatman')}
             />
           )}
@@ -84,6 +87,9 @@ function StreamTeam() {
           ) : (
             <Stream
               twitchUser='nickmercs'
+              className='grid-2'
+              isMutable
+              isNotFullscreen
               switchStream={() => switchStream('nickmercs')}
             />
           )}
@@ -98,6 +104,9 @@ function StreamTeam() {
           ) : (
             <Stream
               twitchUser='cloakzy'
+              className='grid-3'
+              isMutable
+              isNotFullscreen
               switchStream={() => switchStream('cloakzy')}
             />
           )}
@@ -111,6 +120,9 @@ function StreamTeam() {
           ) : (
             <Stream
               twitchUser='swagg'
+              className='grid-4'
+              isMutable
+              isNotFullscreen
               switchStream={() => switchStream('swagg')}
             />
           )}

@@ -1,3 +1,4 @@
+import React, { useState } from 'react';
 import { useQuery } from '@apollo/react-hooks';
 import gql from 'graphql-tag';
 
@@ -18,22 +19,23 @@ export const USER_INFO = gql`
 `;
 
 function Stream(props) {
+  const [isMuted, setIsMuted] = useState(false);
   const { loading, error, data } = useQuery(USER_INFO, {
     variables: { twitchUser: props.twitchUser, user_id: props.twitchUser },
   });
   if (loading) return <p>Loading ...</p>;
-  if (error)
-    return (
-      <>
-        <h3>Sorry, there was an error.</h3>
-        <p>{error.message}</p>
-      </>
-    );
+  // if (error)
+  //   return (
+  //     <>
+  //       <h3>Sorry, there was an error.</h3>
+  //       <p>{error.message}</p>
+  //     </>
+  //   );
   const video = props.twitchUser;
 
   return (
     <>
-      <div className='stream-wrapper' key={video.id}>
+      <div className={`stream-wrapper ${props.className}`} key={video.id}>
         <h4 className='title center-align'>
           {video == 'df_thelivingroom'
             ? 'Living Room'
@@ -46,7 +48,7 @@ function Stream(props) {
         <div className='stream'>
           <div className='video'>
             <iframe
-              src={`https://player.twitch.tv/?channel=${video}&parent=distancefest.com&autoplay=true&muted=false`}
+              src={`https://player.twitch.tv/?channel=${video}&parent=distancefest.com&autoplay=true&muted=${isMuted}`}
               height='300'
               width='900'
               frameBorder='0'
@@ -54,9 +56,16 @@ function Stream(props) {
             ></iframe>
           </div>
         </div>
-        <div className='fullscreen' onClick={props.switchStream}>
-          View Fullscreen
-        </div>
+        {!props.isNotFullscreen ? (
+          <div className='fullscreen' onClick={props.switchStream}>
+            View Fullscreen
+          </div>
+        ) : null}
+        {props.isMutable ? (
+          <div className='fullscreen mute' onClick={() => setIsMuted(!isMuted)}>
+            {isMuted ? 'Unmute' : 'Mute'}
+          </div>
+        ) : null}
       </div>
     </>
   );
