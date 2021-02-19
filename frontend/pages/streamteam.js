@@ -110,20 +110,20 @@ function StreamTeam() {
               switchStream={() => switchStream('cloakzy')}
             />
           )}
-          {twitchUserName === 'swagg' ? (
+          {twitchUserName === 'sypherpk' ? (
             <div className='stream-wrapper'>
-              <h4 className='title center-align'>swagg</h4>
+              <h4 className='title center-align'>sypherpk</h4>
               <div className='stream fullscreened'>
                 <div className='video'>Fullscreened</div>
               </div>
             </div>
           ) : (
             <Stream
-              twitchUser='swagg'
+              twitchUser='sypherpk'
               className='grid-4'
               isMutable
               isNotFullscreen
-              switchStream={() => switchStream('swagg')}
+              switchStream={() => switchStream('sypherpk')}
             />
           )}
         </div>

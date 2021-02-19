@@ -19,7 +19,7 @@ export const USER_INFO = gql`
 `;
 
 function Stream(props) {
-  const [isMuted, setIsMuted] = useState(false);
+  const [isMuted, setIsMuted] = useState(true);
   const { loading, error, data } = useQuery(USER_INFO, {
     variables: { twitchUser: props.twitchUser, user_id: props.twitchUser },
   });
