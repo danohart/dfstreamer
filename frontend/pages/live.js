@@ -1,88 +1,139 @@
-import React, { useState, useEffect, useRef } from 'react';
-import Head from 'next/head';
-import { useQuery } from '@apollo/react-hooks';
-import gql from 'graphql-tag';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faTimes } from '@fortawesome/free-solid-svg-icons';
-import LiveStream from '../components/LiveStream';
-import Stream from '../components/Stream';
-import Events from '../components/Events';
-import Notification from '../components/Notification';
-import Fundraiser from '../components/Fundraiser';
+import React, { useState, useEffect, useRef } from "react";
+import Head from "next/head";
+import { useQuery } from "@apollo/react-hooks";
+import gql from "graphql-tag";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faTimes } from "@fortawesome/free-solid-svg-icons";
+import LiveStream from "../components/LiveStream";
+import Stream from "../components/Stream";
+import Events from "../components/Events";
+import Notification from "../components/Notification";
+import Fundraiser from "../components/Fundraiser";
+
+// Configuration
+const ROOMS = [
+  { id: "df_thelivingroom", name: "Living Room" },
+  { id: "df_thebedroom", name: "Bedroom" },
+  { id: "df_thegarage", name: "Garage" },
+];
+
+const SHEET_API_CONFIG = {
+  url: "https://api.sheetson.com/v2/sheets/DFData",
+  headers: {
+    "Content-Type": "application/json",
+    Authorization:
+      "Bearer HUH6MgEQHEYCXAl6mxcFzbJuiY6Fuw6JYNDmNdU7DCkf2q6U9jdCLdux3Pg",
+    "X-Spreadsheet-Id": "1QlhQOT_sZqiKiPeizDO8FvE-57gCwaVXjyZ4I0W5Cg8",
+  },
+};
+
+const LIVE_STREAMS = gql`
+  query LIVE_STREAMS {
+    twitchUserStream {
+      user_name
+      viewer_count
+    }
+  }
+`;
 
 function Live() {
-  const ref = useRef('');
+  const stickyRef = useRef(null);
   const [isChatHidden, setChatHidden] = useState(true);
-  const [twitchUserName, setTwitchUserName] = useState('df_thelivingroom');
-  const [fundAmount, setFundAmount] = useState('20');
-
+  const [twitchUserName, setTwitchUserName] = useState("df_thelivingroom");
+  const [fundAmount, setFundAmount] = useState("20");
   const [isSticky, setSticky] = useState(false);
   const [notification, setNotification] = useState(false);
 
+  const { loading, data } = useQuery(LIVE_STREAMS);
+
+  // Handle scroll for sticky header
   const handleScroll = () => {
-    setSticky(ref.current.getBoundingClientRect().top <= 0);
+    if (stickyRef.current) {
+      setSticky(stickyRef.current.getBoundingClientRect().top <= 0);
+    }
   };
 
+  // Fetch sheet data
+  const getSheetData = async () => {
+    try {
+      const response = await fetch(SHEET_API_CONFIG.url, {
+        headers: SHEET_API_CONFIG.headers,
+      });
+      const sheetData = await response.json();
+
+      if (sheetData.results?.[0]) {
+        setTwitchUserName(sheetData.results[0].room);
+        setFundAmount(sheetData.results[0].amount);
+      }
+
+      return sheetData;
+    } catch (error) {
+      console.error("Error fetching sheet data:", error);
+    }
+  };
+
+  // Toggle chat visibility
+  const toggleChat = () => {
+    setChatHidden((prev) => !prev);
+    if (isChatHidden) {
+      window.scrollTo({ top: 450, behavior: "smooth" });
+    }
+  };
+
+  // Switch between streams
+  const switchStream = (roomId) => {
+    setTwitchUserName(roomId);
+    showNotification();
+    window.scrollTo({ top: 300, left: 100, behavior: "smooth" });
+  };
+
+  // Show notification temporarily
+  const showNotification = () => {
+    setNotification(true);
+    setTimeout(() => setNotification(false), 8000);
+  };
+
+  // Render stream thumbnail or fullscreen indicator
+  const renderStreamThumbnail = (room) => {
+    if (twitchUserName === room.id) {
+      return (
+        <div className='stream-wrapper' key={room.id}>
+          <h4 className='title center-align'>{room.name}</h4>
+          <div className='stream fullscreened'>
+            <div className='video'>Fullscreened</div>
+          </div>
+        </div>
+      );
+    }
+
+    return (
+      <Stream
+        key={room.id}
+        twitchUser={room.id}
+        switchStream={() => switchStream(room.id)}
+      />
+    );
+  };
+
+  // Setup effects
   useEffect(() => {
-    window.addEventListener('scroll', handleScroll);
+    window.addEventListener("scroll", handleScroll);
     getSheetData();
 
     return () => {
-      window.removeEventListener('scroll', () => handleScroll);
+      window.removeEventListener("scroll", handleScroll);
     };
   }, []);
 
-  async function getSheetData() {
-    const fetchData = await fetch('https://api.sheetson.com/v2/sheets/DFData', {
-      headers: {
-        'Content-Type': 'application/json',
-        Authorization: `Bearer HUH6MgEQHEYCXAl6mxcFzbJuiY6Fuw6JYNDmNdU7DCkf2q6U9jdCLdux3Pg`,
-        'X-Spreadsheet-Id': '1QlhQOT_sZqiKiPeizDO8FvE-57gCwaVXjyZ4I0W5Cg8',
-      },
-    });
-    const sheetData = await fetchData.json();
-    console.log(sheetData);
-
-    setTwitchUserName(sheetData.results[0].room);
-    setFundAmount(sheetData.results[0].amount);
-    return sheetData;
-  }
-
-  function chatPopup() {
-    isChatHidden === false ? setChatHidden(true) : setChatHidden(false);
-    if (isChatHidden === true)
-      window.scrollTo({
-        top: 450,
-        behavior: 'smooth',
-      });
-  }
-
-  function Notifications() {
-    setNotification(true);
-    setTimeout(function () {
-      setNotification(false);
-    }, 8000);
-  }
-
-  const { loading, data } = useQuery(LIVE_STREAMS);
   if (loading) return <p>Waiting</p>;
-
-  const switchStream = (e) => {
-    setTwitchUserName(e);
-    Notifications();
-    window.scrollTo({
-      top: 300,
-      left: 100,
-      behavior: 'smooth',
-    });
-  };
 
   return (
     <>
       <Head>
         <title>Live - Distance Fest</title>
       </Head>
-      <div className={!isChatHidden ? 'home chat-open' : 'home'}>
+
+      <div className={!isChatHidden ? "home chat-open" : "home"}>
         <div className='header'>
           <div className='welcome center-align'>
             <h1 data-text='Welcome To Distance Fest'>
@@ -94,67 +145,32 @@ function Live() {
             New Year's Eve
           </h3>
         </div>
-        <div className={`sticky-wrapper${isSticky ? ' sticky' : ''}`} ref={ref}>
+
+        <div
+          className={`sticky-wrapper${isSticky ? " sticky" : ""}`}
+          ref={stickyRef}
+        >
           <LiveStream twitchUser={twitchUserName} />
         </div>
+
         <h3 className='center-align' data-text='Switch Rooms'>
           Switch Rooms
         </h3>
-        <div className='stream-thumbs'>
-          {twitchUserName === 'df_thelivingroom' ? (
-            <div className='stream-wrapper'>
-              <h4 className='title center-align'>Living Room</h4>
-              <div className='stream fullscreened'>
-                <div className='video'>Fullscreened</div>
-              </div>
-            </div>
-          ) : (
-            <Stream
-              twitchUser='df_thelivingroom'
-              switchStream={() => switchStream('df_thelivingroom')}
-            />
-          )}
 
-          {twitchUserName === 'df_thebedroom' ? (
-            <div className='stream-wrapper'>
-              <h4 className='title center-align'>Bedroom</h4>
-              <div className='stream fullscreened'>
-                <div className='video'>Fullscreened</div>
-              </div>
-            </div>
-          ) : (
-            <Stream
-              twitchUser='df_thebedroom'
-              switchStream={() => switchStream('df_thebedroom')}
-            />
-          )}
-          {twitchUserName === 'df_thegarage' ? (
-            <div className='stream-wrapper'>
-              <h4 className='title center-align'>Garage</h4>
-              <div className='stream fullscreened'>
-                <div className='video'>Fullscreened</div>
-              </div>
-            </div>
-          ) : (
-            <Stream
-              twitchUser='df_thegarage'
-              switchStream={() => switchStream('df_thegarage')}
-            />
-          )}
-        </div>
+        <div className='stream-thumbs'>{ROOMS.map(renderStreamThumbnail)}</div>
       </div>
 
-      {isChatHidden ? (
-        <div className='chat-tab' onClick={() => chatPopup()}>
+      {/* Chat Tab */}
+      {isChatHidden && (
+        <div className='chat-tab' onClick={toggleChat}>
           Chat
         </div>
-      ) : (
-        ''
       )}
 
-      {!isChatHidden ? (
+      {/* Chat Container */}
+      {!isChatHidden && (
         <div className='chat-container expanded'>
-          <div className='close-chat' onClick={() => chatPopup()}>
+          <div className='close-chat' onClick={toggleChat}>
             <FontAwesomeIcon icon={faTimes} /> Close Chat
           </div>
           <div className='chat'>
@@ -165,17 +181,17 @@ function Live() {
               frameBorder='0'
               scrolling='yes'
               id='chat_embed'
-            ></iframe>
+            />
           </div>
         </div>
-      ) : (
-        ''
       )}
 
       <Fundraiser amount={fundAmount} />
-      <div className={!isChatHidden ? 'events chat-open' : 'events'}>
+
+      <div className={!isChatHidden ? "events chat-open" : "events"}>
         <Events />
       </div>
+
       <div className='notifications'>
         <Notification
           twitchUserName={twitchUserName}
@@ -187,12 +203,4 @@ function Live() {
   );
 }
 
-const LIVE_STREAMS = gql`
-  query LIVE_STREAMS {
-    twitchUserStream {
-      user_name
-      viewer_count
-    }
-  }
-`;
 export default Live;

@@ -1,12 +1,6 @@
-import Head from 'next/head';
-import Header from './Header';
-import Footer from './Footer';
-import ReactGA from 'react-ga';
-
-if (typeof window !== 'undefined') {
-  ReactGA.initialize('UA-27102802-6');
-  ReactGA.pageview(window.location.pathname + window.location.search);
-}
+import Head from "next/head";
+import Header from "./Header";
+import Footer from "./Footer";
 
 function Page(props) {
   return (
@@ -27,7 +21,6 @@ function Page(props) {
           content='https://distancefest.com/dfheader.png'
         />
       </Head>
-      {/* <Header /> */}
       <div className='main'>{props.children}</div>
       <Footer />
     </div>

@@ -1,26 +1,22 @@
-import React from 'react';
-import ArtistSubmission from '../components/ArtistSubmission';
-
 function Home() {
   return (
-    <>
-      <div className='home'>
-        <div className='header'>
-          <div className='welcome center-align'>
-            {/* <a href="/">
+    <div className='home'>
+      <div className='header'>
+        <div className='welcome center-align'>
+          {/* <a href="/">
           <img src="../static/Welcome.png" />
         </a> */}
-            <h1 data-text='Welcome To Distance Fest'>
-              <a href='/'>Welcome To Distance Fest</a>
-            </h1>
-          </div>
-          <h2>Live Music from Safe Spaces</h2>
-          <h3 className='center-align' data-text="New Year's Eve">
-            New Year's Eve
-          </h3>
-          <h2 className='center-align'>We're Back!</h2>
+          <h1 data-text='Welcome To Distance Fest'>
+            <a href='/'>Welcome To Distance Fest</a>
+          </h1>
         </div>
-        {/* <div className='submission'>
+        <h2>Live Music from Safe Spaces</h2>
+        <h3 className='center-align' data-text="New Year's Eve">
+          New Year's Eve
+        </h3>
+        <h2 className='center-align'>We're Back!</h2>
+      </div>
+      {/* <div className='submission'>
           <div className='submission-title'>
             <h2 className='center-align' data-text='Artist Submissions'>
               Artist Submissions
@@ -63,8 +59,7 @@ function Home() {
             </form>
           </div> 
       </div>*/}
-      </div>
-    </>
+    </div>
   );
 }
 
